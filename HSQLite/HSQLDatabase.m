@@ -67,6 +67,18 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     }
 }
 
++ (BOOL)raiseExceptionOrGetError:(NSError **)error forResultCode:(int)resultCode
+{
+    if (resultCode == SQLITE_OK) return YES;
+    NSString *msg = [self stringForResultCode:resultCode];
+    if (error) {
+        *error = [NSError errorWithDomain:HSQLErrorDomain code:resultCode userInfo:@{NSLocalizedDescriptionKey: msg}];
+    } else {
+        [NSException raise:HSQLExceptionName format:@"Error %d: %@", resultCode, msg];
+    }
+    return NO;
+}
+
 + (instancetype)databaseWithPath:(NSString *)path
 {
     HSQLDatabaseFlags flags = (HSQLDatabaseOpenCreate | HSQLDatabaseOpenReadWrite);
@@ -115,9 +127,15 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     return self;
 }
 
-- (void)raiseException
+- (void)raiseExceptionOrGetError:(NSError *__autoreleasing *)error
 {
-    [NSException raise:HSQLExceptionName format:@"%s", sqlite3_errmsg(_db)];
+    if (error) {
+        int code = sqlite3_errcode(_db);
+        NSString *msg = [NSString stringWithFormat:@"%s", sqlite3_errmsg(_db)];
+        *error = [NSError errorWithDomain:HSQLErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: msg}];
+    } else {
+        [NSException raise:HSQLExceptionName format:@"%s", sqlite3_errmsg(_db)];
+    }
 }
 
 - (NSError *)latestError
@@ -134,7 +152,7 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     int r = sqlite3_close(_db); // If _db is NULL, close is a no-op
     if (r != SQLITE_OK) {
         // Might fail if open prepared statements or blob objects
-        [self raiseException];
+        [self raiseExceptionOrGetError:NULL];
     } else {
         _db = NULL;
     }
@@ -179,12 +197,13 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
 
 - (void)setBusyTimeout:(NSTimeInterval)timeout
 {
+    NSParameterAssert(timeout >= 0);
     int ms = 1000 * timeout;
     int err = sqlite3_busy_timeout(_db, ms);
     if (err == SQLITE_OK) {
         busyHandler = NULL;
     } else {
-        [self raiseException];
+        [self raiseExceptionOrGetError:NULL];
     }
 }
 
@@ -199,7 +218,7 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     if (err == SQLITE_OK) {
         busyHandler = [handler copy];
     } else {
-        [self raiseException];
+        [self raiseExceptionOrGetError:NULL];
     }
 }
 
@@ -217,9 +236,7 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     sqlite3_stmt *stmt = NULL;
     int r = sqlite3_prepare_v2(_db, [sql UTF8String], -1, &stmt, NULL);
     if (r != SQLITE_OK) {
-        if (pError) {
-            *pError = [self latestError];
-        }
+        [self raiseExceptionOrGetError:pError];
         return nil;
     }
     if (stmt) {
@@ -228,10 +245,11 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
         }
         return [[HSQLStatement alloc] initWithDatabase:self stmt:stmt];
     } else {
+        NSString *msg = [NSString stringWithFormat:@"Cannot compile SQL: %@", sql];
         if (pError) {
-            NSString *msg = [NSString stringWithFormat:@"Cannot compile as SQL '%@'", sql];
-            *pError = [NSError errorWithDomain:HSQLErrorDomain code:SQLITE_ERROR userInfo:
-                       @{NSLocalizedDescriptionKey: msg}];
+            *pError = [NSError errorWithDomain:HSQLErrorDomain code:SQLITE_ERROR userInfo:@{NSLocalizedDescriptionKey: msg}];
+        } else {
+            [NSException raise:HSQLExceptionName format:@"%@", msg];
         }
         return nil;
     }
@@ -245,15 +263,18 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     }
     char *errmsg = NULL;
     int r = sqlite3_exec(_db, [sql UTF8String], NULL, NULL, &errmsg);
-    if (r && pError) {
+    if (r) {
         NSString *msg;
         if (errmsg) {
             msg = [NSString stringWithUTF8String:errmsg];
         } else {
             msg = [[self class] stringForResultCode:r];
         }
-        *pError = [NSError errorWithDomain:HSQLErrorDomain code:r userInfo:
-                   @{NSLocalizedDescriptionKey: msg}];
+        if (pError) {
+            *pError = [NSError errorWithDomain:HSQLErrorDomain code:r userInfo:@{NSLocalizedDescriptionKey: msg}];
+        } else {
+            [NSException raise:HSQLExceptionName format:@"exec: %@", msg];
+        }
     }
     return (r == SQLITE_OK);
 }

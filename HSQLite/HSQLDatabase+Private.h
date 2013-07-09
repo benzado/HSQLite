@@ -10,7 +10,8 @@
 #define HSQLite_HSQLDatabase_Private_h
 
 @interface HSQLDatabase (Private)
-- (void)raiseException;
++ (BOOL)raiseExceptionOrGetError:(NSError **)error forResultCode:(int)resultCode;
+- (void)raiseExceptionOrGetError:(NSError **)error;
 - (int)busyForNumberOfLockAttempts:(int)attempts;
 - (void)collationNeededWithName:(NSString *)name;
 @end

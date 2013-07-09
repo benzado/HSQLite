@@ -38,7 +38,7 @@ void HSQLCollationNeeded(void *ptr, sqlite3 *db, int eTextRep, const char *n)
     int r;
     r = sqlite3_create_collation_v2(_db, [name UTF8String], SQLITE_UTF8, block, HSQLCollationCompare, HSQLCollationDestroy);
     if (r != SQLITE_OK) {
-        [self raiseException];
+        [self raiseExceptionOrGetError:NULL];
     }
 }
 
@@ -46,7 +46,7 @@ void HSQLCollationNeeded(void *ptr, sqlite3 *db, int eTextRep, const char *n)
 {
     int r = sqlite3_create_collation_v2(_db, [name UTF8String], SQLITE_UTF8, NULL, NULL, NULL);
     if (r != SQLITE_OK) {
-        [self raiseException];
+        [self raiseExceptionOrGetError:NULL];
     }
 }
 
@@ -66,7 +66,7 @@ void HSQLCollationNeeded(void *ptr, sqlite3 *db, int eTextRep, const char *n)
     collationNeededHandler = [handler copy];
     int err = sqlite3_collation_needed(_db, (__bridge void *)(self), &HSQLCollationNeeded);
     if (err != SQLITE_OK) {
-        [self raiseException];
+        [self raiseExceptionOrGetError:NULL];
     }
 }
 

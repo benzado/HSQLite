@@ -14,3 +14,4 @@
 #import <HSQLite/HSQLDatabase+Collations.h>
 #import <HSQLite/HSQLDatabase+Functions.h>
 #import <HSQLite/HSQLFunctionContext.h>
+#import <HSQLite/HSQLBackupSession.h>

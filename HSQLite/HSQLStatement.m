@@ -7,6 +7,7 @@
 //
 
 #import "HSQLDatabase.h"
+#import "HSQLDatabase+Private.h"
 #import "HSQLStatement.h"
 #import "HSQLRow.h"
 #import "HSQLRow+Private.h"
@@ -110,10 +111,12 @@
                 break;
         }
     }
+    else {
+        [NSException raise:NSInvalidArgumentException format:@"can't use object of class %@ as parameter", [anObject class]];
+    }
     if (r == SQLITE_RANGE) {
         [NSException raise:NSRangeException format:@"parameter index %d out of range", idx];
     }
-    
 }
 
 - (void)setObject:(id)anObject forKeyedSubscript:(NSString *)key
@@ -140,9 +143,7 @@
                 done = YES;
                 break;
             default:
-                done = YES;
-                [NSException raise:HSQLExceptionName format:@"sqlite3_step: %d", r];
-                // TODO: there are situations where raising an exception is not needed (e.g., SQLITE_BUSY)
+                [HSQLDatabase raiseExceptionOrGetError:NULL forResultCode:r];
                 break;
         }
     }

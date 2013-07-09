@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC2C9CAF178C7B07009F291A /* HSQLBackupSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C9CAE178C7B07009F291A /* HSQLBackupSession.m */; };
+		BC2C9CB1178CA16F009F291A /* HSQLBackupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C9CB0178CA16F009F291A /* HSQLBackupTests.m */; };
+		BC2C9CB2178CA1B1009F291A /* HSQLBackupSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC2C9CAD178C7B07009F291A /* HSQLBackupSession.h */; };
 		BC4557D41776B18E00D7C71E /* HSQLStatementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */; };
 		BC4557D51776BDF300D7C71E /* HSQLRow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC55177651AD005FD819 /* HSQLRow.h */; };
 		BC4557D81776DC1D00D7C71E /* HSQLDatabase+Collations.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */; };
@@ -56,6 +59,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				BC2C9CB2178CA1B1009F291A /* HSQLBackupSession.h in CopyFiles */,
 				BC4557F41777CF5300D7C71E /* HSQLDatabase+Pragmas.h in CopyFiles */,
 				BC4557ED1777CDF600D7C71E /* HSQLDatabase+Collations.h in CopyFiles */,
 				BC4557EE1777CDF600D7C71E /* HSQLDatabase+Functions.h in CopyFiles */,
@@ -75,6 +79,10 @@
 		BC002B3F178BC163006FA4B8 /* HSQLStatement+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLStatement+Private.h"; sourceTree = "<group>"; };
 		BC002B40178BC17D006FA4B8 /* HSQLRow+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLRow+Private.h"; sourceTree = "<group>"; };
 		BC002B41178BC1A7006FA4B8 /* HSQLFunctionContext+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLFunctionContext+Private.h"; sourceTree = "<group>"; };
+		BC2C9CAC178C78F9009F291A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BC2C9CAD178C7B07009F291A /* HSQLBackupSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLBackupSession.h; sourceTree = "<group>"; };
+		BC2C9CAE178C7B07009F291A /* HSQLBackupSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLBackupSession.m; sourceTree = "<group>"; };
+		BC2C9CB0178CA16F009F291A /* HSQLBackupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLBackupTests.m; sourceTree = "<group>"; };
 		BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLStatementTests.m; sourceTree = "<group>"; };
 		BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Collations.h"; sourceTree = "<group>"; };
 		BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Collations.m"; sourceTree = "<group>"; };
@@ -188,6 +196,8 @@
 		BC72DC7617782AF700C3B4E8 /* Backup */ = {
 			isa = PBXGroup;
 			children = (
+				BC2C9CAD178C7B07009F291A /* HSQLBackupSession.h */,
+				BC2C9CAE178C7B07009F291A /* HSQLBackupSession.m */,
 			);
 			name = Backup;
 			sourceTree = "<group>";
@@ -195,6 +205,7 @@
 		BCDBBC141775F9C8005FD819 = {
 			isa = PBXGroup;
 			children = (
+				BC2C9CAC178C78F9009F291A /* README.md */,
 				BCDBBC221775F9C8005FD819 /* HSQLite */,
 				BCDBBC361775F9C9005FD819 /* HSQLiteTests */,
 				BCDBBC1F1775F9C8005FD819 /* Frameworks */,
@@ -250,6 +261,7 @@
 				BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */,
 				BC4557E51777C87000D7C71E /* HSQLCollationTests.m */,
 				BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */,
+				BC2C9CB0178CA16F009F291A /* HSQLBackupTests.m */,
 				BCDBBC371775F9C9005FD819 /* Supporting Files */,
 			);
 			path = HSQLiteTests;
@@ -354,6 +366,7 @@
 			files = (
 				BCDBBC481775FC34005FD819 /* HSQLDatabase.m in Sources */,
 				BCDBBC4D17760B1F005FD819 /* HSQLStatement.m in Sources */,
+				BC2C9CAF178C7B07009F291A /* HSQLBackupSession.m in Sources */,
 				BCDBBC57177651AD005FD819 /* HSQLRow.m in Sources */,
 				BC4557E11776E6A600D7C71E /* HSQLFunctionContext.m in Sources */,
 				BCDBBC5417763FDB005FD819 /* HSQLColumnValue.m in Sources */,
@@ -369,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCDBBC591776A0DA005FD819 /* HSQLDatabaseTests.m in Sources */,
+				BC2C9CB1178CA16F009F291A /* HSQLBackupTests.m in Sources */,
 				BC4557E61777C87000D7C71E /* HSQLCollationTests.m in Sources */,
 				BC4557D41776B18E00D7C71E /* HSQLStatementTests.m in Sources */,
 				BC4557E81777C87C00D7C71E /* HSQLFunctionTests.m in Sources */,
