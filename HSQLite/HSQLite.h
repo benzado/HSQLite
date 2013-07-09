@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@interface HSQLite : NSObject
-
-@end
+#import <HSQLite/HSQLDatabase.h>
+#import <HSQLite/HSQLStatement.h>
+#import <HSQLite/HSQLRow.h>
+#import <HSQLite/HSQLValue.h>
+#import <HSQLite/HSQLDatabase+Pragmas.h>
+#import <HSQLite/HSQLDatabase+Collations.h>
+#import <HSQLite/HSQLDatabase+Functions.h>
+#import <HSQLite/HSQLFunctionContext.h>

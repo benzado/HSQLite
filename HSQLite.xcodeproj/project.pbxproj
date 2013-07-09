@@ -7,15 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC4557D41776B18E00D7C71E /* HSQLStatementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */; };
+		BC4557D51776BDF300D7C71E /* HSQLRow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC55177651AD005FD819 /* HSQLRow.h */; };
+		BC4557D81776DC1D00D7C71E /* HSQLDatabase+Collations.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */; };
+		BC4557DB1776E0FE00D7C71E /* HSQLDatabase+Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557DA1776E0FE00D7C71E /* HSQLDatabase+Functions.m */; };
+		BC4557DE1776E3A600D7C71E /* HSQLParameterValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557DD1776E3A600D7C71E /* HSQLParameterValue.m */; };
+		BC4557E11776E6A600D7C71E /* HSQLFunctionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557E01776E6A600D7C71E /* HSQLFunctionContext.m */; };
+		BC4557E61777C87000D7C71E /* HSQLCollationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557E51777C87000D7C71E /* HSQLCollationTests.m */; };
+		BC4557E81777C87C00D7C71E /* HSQLFunctionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */; };
+		BC4557EC1777CAC300D7C71E /* letters.sql in Resources */ = {isa = PBXBuildFile; fileRef = BC4557EB1777CAC300D7C71E /* letters.sql */; };
+		BC4557ED1777CDF600D7C71E /* HSQLDatabase+Collations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */; };
+		BC4557EE1777CDF600D7C71E /* HSQLDatabase+Functions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557D91776E0FE00D7C71E /* HSQLDatabase+Functions.h */; };
+		BC4557EF1777CDF600D7C71E /* HSQLFunctionContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */; };
+		BC4557F21777CEB500D7C71E /* HSQLDatabase+Pragmas.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557F11777CEB500D7C71E /* HSQLDatabase+Pragmas.m */; };
+		BC4557F41777CF5300D7C71E /* HSQLDatabase+Pragmas.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557F01777CEB500D7C71E /* HSQLDatabase+Pragmas.h */; };
 		BCDBBC211775F9C8005FD819 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC201775F9C8005FD819 /* Foundation.framework */; };
 		BCDBBC261775F9C8005FD819 /* HSQLite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC251775F9C8005FD819 /* HSQLite.h */; };
-		BCDBBC281775F9C8005FD819 /* HSQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC271775F9C8005FD819 /* HSQLite.m */; };
 		BCDBBC2F1775F9C9005FD819 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC2E1775F9C9005FD819 /* XCTest.framework */; };
 		BCDBBC301775F9C9005FD819 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC201775F9C8005FD819 /* Foundation.framework */; };
-		BCDBBC321775F9C9005FD819 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC311775F9C9005FD819 /* UIKit.framework */; };
 		BCDBBC351775F9C9005FD819 /* libHSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC1D1775F9C8005FD819 /* libHSQLite.a */; };
 		BCDBBC3B1775F9C9005FD819 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCDBBC391775F9C9005FD819 /* InfoPlist.strings */; };
-		BCDBBC3D1775F9C9005FD819 /* HSQLiteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC3C1775F9C9005FD819 /* HSQLiteTests.m */; };
+		BCDBBC481775FC34005FD819 /* HSQLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC471775FC34005FD819 /* HSQLDatabase.m */; };
+		BCDBBC4A1775FC61005FD819 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC491775FC61005FD819 /* libsqlite3.dylib */; };
+		BCDBBC4D17760B1F005FD819 /* HSQLStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC4C17760B1F005FD819 /* HSQLStatement.m */; };
+		BCDBBC5417763FDB005FD819 /* HSQLColumnValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC5317763FDB005FD819 /* HSQLColumnValue.m */; };
+		BCDBBC57177651AD005FD819 /* HSQLRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC56177651AD005FD819 /* HSQLRow.m */; };
+		BCDBBC591776A0DA005FD819 /* HSQLDatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC581776A0DA005FD819 /* HSQLDatabaseTests.m */; };
+		BCDBBC5A1776A248005FD819 /* HSQLDatabase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC461775FC34005FD819 /* HSQLDatabase.h */; };
+		BCDBBC5B1776A248005FD819 /* HSQLStatement.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */; };
+		BCDBBC5C1776A248005FD819 /* HSQLValue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC4F17762A16005FD819 /* HSQLValue.h */; };
+		BCDBBC5D1776A291005FD819 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC491775FC61005FD819 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +56,14 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				BC4557F41777CF5300D7C71E /* HSQLDatabase+Pragmas.h in CopyFiles */,
+				BC4557ED1777CDF600D7C71E /* HSQLDatabase+Collations.h in CopyFiles */,
+				BC4557EE1777CDF600D7C71E /* HSQLDatabase+Functions.h in CopyFiles */,
+				BC4557EF1777CDF600D7C71E /* HSQLFunctionContext.h in CopyFiles */,
+				BC4557D51776BDF300D7C71E /* HSQLRow.h in CopyFiles */,
+				BCDBBC5A1776A248005FD819 /* HSQLDatabase.h in CopyFiles */,
+				BCDBBC5B1776A248005FD819 /* HSQLStatement.h in CopyFiles */,
+				BCDBBC5C1776A248005FD819 /* HSQLValue.h in CopyFiles */,
 				BCDBBC261775F9C8005FD819 /* HSQLite.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,17 +71,43 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC002B3E178BC13E006FA4B8 /* HSQLDatabase+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Private.h"; sourceTree = "<group>"; };
+		BC002B3F178BC163006FA4B8 /* HSQLStatement+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLStatement+Private.h"; sourceTree = "<group>"; };
+		BC002B40178BC17D006FA4B8 /* HSQLRow+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLRow+Private.h"; sourceTree = "<group>"; };
+		BC002B41178BC1A7006FA4B8 /* HSQLFunctionContext+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLFunctionContext+Private.h"; sourceTree = "<group>"; };
+		BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLStatementTests.m; sourceTree = "<group>"; };
+		BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Collations.h"; sourceTree = "<group>"; };
+		BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Collations.m"; sourceTree = "<group>"; };
+		BC4557D91776E0FE00D7C71E /* HSQLDatabase+Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Functions.h"; sourceTree = "<group>"; };
+		BC4557DA1776E0FE00D7C71E /* HSQLDatabase+Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Functions.m"; sourceTree = "<group>"; };
+		BC4557DC1776E3A600D7C71E /* HSQLParameterValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLParameterValue.h; sourceTree = "<group>"; };
+		BC4557DD1776E3A600D7C71E /* HSQLParameterValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLParameterValue.m; sourceTree = "<group>"; };
+		BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLFunctionContext.h; sourceTree = "<group>"; };
+		BC4557E01776E6A600D7C71E /* HSQLFunctionContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLFunctionContext.m; sourceTree = "<group>"; };
+		BC4557E51777C87000D7C71E /* HSQLCollationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLCollationTests.m; sourceTree = "<group>"; };
+		BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLFunctionTests.m; sourceTree = "<group>"; };
+		BC4557EB1777CAC300D7C71E /* letters.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = letters.sql; sourceTree = "<group>"; };
+		BC4557F01777CEB500D7C71E /* HSQLDatabase+Pragmas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Pragmas.h"; sourceTree = "<group>"; };
+		BC4557F11777CEB500D7C71E /* HSQLDatabase+Pragmas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Pragmas.m"; sourceTree = "<group>"; };
 		BCDBBC1D1775F9C8005FD819 /* libHSQLite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHSQLite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDBBC201775F9C8005FD819 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BCDBBC241775F9C8005FD819 /* HSQLite-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLite-Prefix.pch"; sourceTree = "<group>"; };
 		BCDBBC251775F9C8005FD819 /* HSQLite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQLite.h; sourceTree = "<group>"; };
-		BCDBBC271775F9C8005FD819 /* HSQLite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQLite.m; sourceTree = "<group>"; };
 		BCDBBC2D1775F9C9005FD819 /* HSQLiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSQLiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDBBC2E1775F9C9005FD819 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		BCDBBC311775F9C9005FD819 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		BCDBBC381775F9C9005FD819 /* HSQLiteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HSQLiteTests-Info.plist"; sourceTree = "<group>"; };
 		BCDBBC3A1775F9C9005FD819 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BCDBBC3C1775F9C9005FD819 /* HSQLiteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQLiteTests.m; sourceTree = "<group>"; };
+		BCDBBC461775FC34005FD819 /* HSQLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLDatabase.h; sourceTree = "<group>"; };
+		BCDBBC471775FC34005FD819 /* HSQLDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLDatabase.m; sourceTree = "<group>"; };
+		BCDBBC491775FC61005FD819 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLStatement.h; sourceTree = "<group>"; };
+		BCDBBC4C17760B1F005FD819 /* HSQLStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLStatement.m; sourceTree = "<group>"; };
+		BCDBBC4F17762A16005FD819 /* HSQLValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLValue.h; sourceTree = "<group>"; };
+		BCDBBC5217763FDB005FD819 /* HSQLColumnValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLColumnValue.h; sourceTree = "<group>"; };
+		BCDBBC5317763FDB005FD819 /* HSQLColumnValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLColumnValue.m; sourceTree = "<group>"; };
+		BCDBBC55177651AD005FD819 /* HSQLRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLRow.h; sourceTree = "<group>"; };
+		BCDBBC56177651AD005FD819 /* HSQLRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLRow.m; sourceTree = "<group>"; };
+		BCDBBC581776A0DA005FD819 /* HSQLDatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSQLDatabaseTests.m; path = HSQLiteTests/HSQLDatabaseTests.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCDBBC4A1775FC61005FD819 /* libsqlite3.dylib in Frameworks */,
 				BCDBBC211775F9C8005FD819 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,9 +124,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCDBBC5D1776A291005FD819 /* libsqlite3.dylib in Frameworks */,
 				BCDBBC351775F9C9005FD819 /* libHSQLite.a in Frameworks */,
 				BCDBBC2F1775F9C9005FD819 /* XCTest.framework in Frameworks */,
-				BCDBBC321775F9C9005FD819 /* UIKit.framework in Frameworks */,
 				BCDBBC301775F9C9005FD819 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +134,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC4557E21777C82100D7C71E /* Collations */ = {
+			isa = PBXGroup;
+			children = (
+				BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */,
+				BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */,
+			);
+			name = Collations;
+			sourceTree = "<group>";
+		};
+		BC4557E31777C82900D7C71E /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				BC4557D91776E0FE00D7C71E /* HSQLDatabase+Functions.h */,
+				BC4557DA1776E0FE00D7C71E /* HSQLDatabase+Functions.m */,
+				BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */,
+				BC002B41178BC1A7006FA4B8 /* HSQLFunctionContext+Private.h */,
+				BC4557E01776E6A600D7C71E /* HSQLFunctionContext.m */,
+				BC4557DC1776E3A600D7C71E /* HSQLParameterValue.h */,
+				BC4557DD1776E3A600D7C71E /* HSQLParameterValue.m */,
+			);
+			name = Functions;
+			sourceTree = "<group>";
+		};
+		BC4557E41777C83600D7C71E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BCDBBC461775FC34005FD819 /* HSQLDatabase.h */,
+				BC002B3E178BC13E006FA4B8 /* HSQLDatabase+Private.h */,
+				BCDBBC471775FC34005FD819 /* HSQLDatabase.m */,
+				BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */,
+				BC002B3F178BC163006FA4B8 /* HSQLStatement+Private.h */,
+				BCDBBC4C17760B1F005FD819 /* HSQLStatement.m */,
+				BCDBBC55177651AD005FD819 /* HSQLRow.h */,
+				BC002B40178BC17D006FA4B8 /* HSQLRow+Private.h */,
+				BCDBBC56177651AD005FD819 /* HSQLRow.m */,
+				BCDBBC4F17762A16005FD819 /* HSQLValue.h */,
+				BCDBBC5217763FDB005FD819 /* HSQLColumnValue.h */,
+				BCDBBC5317763FDB005FD819 /* HSQLColumnValue.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		BC4557F31777CEBB00D7C71E /* Pragmas */ = {
+			isa = PBXGroup;
+			children = (
+				BC4557F01777CEB500D7C71E /* HSQLDatabase+Pragmas.h */,
+				BC4557F11777CEB500D7C71E /* HSQLDatabase+Pragmas.m */,
+			);
+			name = Pragmas;
+			sourceTree = "<group>";
+		};
+		BC72DC7617782AF700C3B4E8 /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Backup;
+			sourceTree = "<group>";
+		};
 		BCDBBC141775F9C8005FD819 = {
 			isa = PBXGroup;
 			children = (
@@ -100,9 +214,9 @@
 		BCDBBC1F1775F9C8005FD819 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BCDBBC491775FC61005FD819 /* libsqlite3.dylib */,
 				BCDBBC201775F9C8005FD819 /* Foundation.framework */,
 				BCDBBC2E1775F9C9005FD819 /* XCTest.framework */,
-				BCDBBC311775F9C9005FD819 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -111,7 +225,11 @@
 			isa = PBXGroup;
 			children = (
 				BCDBBC251775F9C8005FD819 /* HSQLite.h */,
-				BCDBBC271775F9C8005FD819 /* HSQLite.m */,
+				BC4557E41777C83600D7C71E /* Core */,
+				BC72DC7617782AF700C3B4E8 /* Backup */,
+				BC4557F31777CEBB00D7C71E /* Pragmas */,
+				BC4557E21777C82100D7C71E /* Collations */,
+				BC4557E31777C82900D7C71E /* Functions */,
 				BCDBBC231775F9C8005FD819 /* Supporting Files */,
 			);
 			path = HSQLite;
@@ -128,7 +246,10 @@
 		BCDBBC361775F9C9005FD819 /* HSQLiteTests */ = {
 			isa = PBXGroup;
 			children = (
-				BCDBBC3C1775F9C9005FD819 /* HSQLiteTests.m */,
+				BCDBBC581776A0DA005FD819 /* HSQLDatabaseTests.m */,
+				BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */,
+				BC4557E51777C87000D7C71E /* HSQLCollationTests.m */,
+				BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */,
 				BCDBBC371775F9C9005FD819 /* Supporting Files */,
 			);
 			path = HSQLiteTests;
@@ -139,6 +260,7 @@
 			children = (
 				BCDBBC381775F9C9005FD819 /* HSQLiteTests-Info.plist */,
 				BCDBBC391775F9C9005FD819 /* InfoPlist.strings */,
+				BC4557EB1777CAC300D7C71E /* letters.sql */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -189,6 +311,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Heroic Software";
+				TargetAttributes = {
+					BCDBBC2C1775F9C9005FD819 = {
+						TestTargetID = BCDBBC1C1775F9C8005FD819;
+					};
+				};
 			};
 			buildConfigurationList = BCDBBC181775F9C8005FD819 /* Build configuration list for PBXProject "HSQLite" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -214,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCDBBC3B1775F9C9005FD819 /* InfoPlist.strings in Resources */,
+				BC4557EC1777CAC300D7C71E /* letters.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +352,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCDBBC281775F9C8005FD819 /* HSQLite.m in Sources */,
+				BCDBBC481775FC34005FD819 /* HSQLDatabase.m in Sources */,
+				BCDBBC4D17760B1F005FD819 /* HSQLStatement.m in Sources */,
+				BCDBBC57177651AD005FD819 /* HSQLRow.m in Sources */,
+				BC4557E11776E6A600D7C71E /* HSQLFunctionContext.m in Sources */,
+				BCDBBC5417763FDB005FD819 /* HSQLColumnValue.m in Sources */,
+				BC4557DE1776E3A600D7C71E /* HSQLParameterValue.m in Sources */,
+				BC4557DB1776E0FE00D7C71E /* HSQLDatabase+Functions.m in Sources */,
+				BC4557D81776DC1D00D7C71E /* HSQLDatabase+Collations.m in Sources */,
+				BC4557F21777CEB500D7C71E /* HSQLDatabase+Pragmas.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +368,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCDBBC3D1775F9C9005FD819 /* HSQLiteTests.m in Sources */,
+				BCDBBC591776A0DA005FD819 /* HSQLDatabaseTests.m in Sources */,
+				BC4557E61777C87000D7C71E /* HSQLCollationTests.m in Sources */,
+				BC4557D41776B18E00D7C71E /* HSQLStatementTests.m in Sources */,
+				BC4557E81777C87C00D7C71E /* HSQLFunctionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +502,12 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "HSQLiteTests/HSQLiteTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -379,6 +524,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HSQLite/HSQLite-Prefix.pch";
 				INFOPLIST_FILE = "HSQLiteTests/HSQLiteTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -403,6 +554,7 @@
 				BCDBBC421775F9C9005FD819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BCDBBC431775F9C9005FD819 /* Build configuration list for PBXNativeTarget "HSQLiteTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +563,7 @@
 				BCDBBC451775F9C9005FD819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
