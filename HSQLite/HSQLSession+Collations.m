@@ -1,13 +1,13 @@
 //
-//  HSQLDatabase+Collations.m
+//  HSQLSession+Collations.m
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/23/13.
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase+Collations.h"
-#import "HSQLDatabase+Private.h"
+#import "HSQLSession+Collations.h"
+#import "HSQLSession+Private.h"
 #import "HSQLValue.h"
 #import "HSQLRow.h"
 #import "HSQLStatement.h"
@@ -26,11 +26,11 @@ void HSQLCollationDestroy(void *comparator)
 
 void HSQLCollationNeeded(void *ptr, sqlite3 *db, int eTextRep, const char *n)
 {
-    HSQLDatabase *database = (__bridge HSQLDatabase *)ptr;
-    [database collationNeededWithName:[NSString stringWithUTF8String:n]];
+    HSQLSession *session = (__bridge HSQLSession *)ptr;
+    [session collationNeededWithName:[NSString stringWithUTF8String:n]];
 }
 
-@implementation HSQLDatabase (Collations)
+@implementation HSQLSession (Collations)
 
 - (void)defineCollationNamed:(NSString *)name comparator:(NSComparator)comparator
 {

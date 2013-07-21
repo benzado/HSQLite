@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class HSQLDatabase;
+@class HSQLSession;
 @class HSQLRow;
 
 @interface HSQLStatement : NSObject
 {
-    HSQLDatabase *_database;
+    HSQLSession *_session;
     sqlite3_stmt *_stmt;
     NSDictionary *_columnIndexesByName;
 }

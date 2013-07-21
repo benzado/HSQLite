@@ -1,13 +1,13 @@
 //
-//  HSQLDatabase.m
+//  HSQLSession.m
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/22/13.
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase.h"
-#import "HSQLDatabase+Private.h"
+#import "HSQLSession.h"
+#import "HSQLSession+Private.h"
 #import "HSQLStatement.h"
 #import "HSQLStatement+Private.h"
 #import "HSQLRow.h"
@@ -17,11 +17,11 @@ NSString * const HSQLErrorDomain = @"HSQLError";
 
 int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
 {
-    HSQLDatabase *db = (__bridge HSQLDatabase *)ptr;
+    HSQLSession *db = (__bridge HSQLSession *)ptr;
     return [db busyForNumberOfLockAttempts:lockAttempts];
 }
 
-@implementation HSQLDatabase
+@implementation HSQLSession
 
 + (void)initialize
 {
@@ -79,25 +79,25 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     return NO;
 }
 
-+ (instancetype)databaseWithPath:(NSString *)path
++ (instancetype)sessionWithFileAtPath:(NSString *)path
 {
-    HSQLDatabaseFlags flags = (HSQLDatabaseOpenCreate | HSQLDatabaseOpenReadWrite);
+    HSQLSessionFlags flags = (HSQLSessionOpenCreate | HSQLSessionOpenReadWrite);
     return [[[self class] alloc] initWithPath:path flags:flags VFSName:nil];
 }
 
-+ (instancetype)databaseWithTemporaryFile
++ (instancetype)sessionWithTemporaryFile
 {
-    HSQLDatabaseFlags flags = (HSQLDatabaseOpenCreate | HSQLDatabaseOpenReadWrite);
+    HSQLSessionFlags flags = (HSQLSessionOpenCreate | HSQLSessionOpenReadWrite);
     return [[[self class] alloc] initWithPath:@"" flags:flags VFSName:nil];
 }
 
-+ (instancetype)databaseInMemory
++ (instancetype)sessionWithMemoryDatabase
 {
-    HSQLDatabaseFlags flags = (HSQLDatabaseOpenCreate | HSQLDatabaseOpenReadWrite);
+    HSQLSessionFlags flags = (HSQLSessionOpenCreate | HSQLSessionOpenReadWrite);
     return [[[self class] alloc] initWithPath:@":memory:" flags:flags VFSName:nil];
 }
 
-+ (instancetype)databaseNamed:(NSString *)name
++ (instancetype)sessionWithFileNamed:(NSString *)name
 {
     // if "name.sqlite" exists in Documents directory, open it
     // else if "name.sqlite" exists in main bundle, copy then open
@@ -105,13 +105,13 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     return nil;
 }
 
-- (instancetype)initWithPath:(NSString *)path flags:(HSQLDatabaseFlags)flags VFSName:(NSString *)VFSName
+- (instancetype)initWithPath:(NSString *)path flags:(HSQLSessionFlags)flags VFSName:(NSString *)VFSName
 {
-    static const int REQUIRED_FLAGS = (HSQLDatabaseOpenReadOnly | HSQLDatabaseOpenReadWrite);
+    static const int REQUIRED_FLAGS = (HSQLSessionOpenReadOnly | HSQLSessionOpenReadWrite);
 
     NSParameterAssert(path);
     if ((flags & REQUIRED_FLAGS) == 0) {
-        [NSException raise:NSInvalidArgumentException format:@"HSQLDatabase flags must include one of HSQLDatabaseOpenReadOnly, HSQLDatabaseOpenReadWrite"];
+        [NSException raise:NSInvalidArgumentException format:@"HSQLSession flags must include either HSQLSessionOpenReadOnly or HSQLSessionOpenReadWrite"];
     }
     NSParameterAssert(flags & REQUIRED_FLAGS);
     if ((self = [super init])) {
@@ -243,7 +243,7 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
         if (pError) {
             *pError = nil;
         }
-        return [[HSQLStatement alloc] initWithDatabase:self stmt:stmt];
+        return [[HSQLStatement alloc] initWithSession:self stmt:stmt];
     } else {
         NSString *msg = [NSString stringWithFormat:@"Cannot compile SQL: %@", sql];
         if (pError) {

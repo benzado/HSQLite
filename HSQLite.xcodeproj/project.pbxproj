@@ -9,37 +9,43 @@
 /* Begin PBXBuildFile section */
 		BC2C9CAF178C7B07009F291A /* HSQLBackupSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C9CAE178C7B07009F291A /* HSQLBackupSession.m */; };
 		BC2C9CB1178CA16F009F291A /* HSQLBackupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C9CB0178CA16F009F291A /* HSQLBackupTests.m */; };
-		BC2C9CB2178CA1B1009F291A /* HSQLBackupSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC2C9CAD178C7B07009F291A /* HSQLBackupSession.h */; };
 		BC4557D41776B18E00D7C71E /* HSQLStatementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */; };
-		BC4557D51776BDF300D7C71E /* HSQLRow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC55177651AD005FD819 /* HSQLRow.h */; };
-		BC4557D81776DC1D00D7C71E /* HSQLDatabase+Collations.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */; };
-		BC4557DB1776E0FE00D7C71E /* HSQLDatabase+Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557DA1776E0FE00D7C71E /* HSQLDatabase+Functions.m */; };
+		BC4557D81776DC1D00D7C71E /* HSQLSession+Collations.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557D71776DC1D00D7C71E /* HSQLSession+Collations.m */; };
+		BC4557DB1776E0FE00D7C71E /* HSQLSession+Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557DA1776E0FE00D7C71E /* HSQLSession+Functions.m */; };
 		BC4557DE1776E3A600D7C71E /* HSQLParameterValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557DD1776E3A600D7C71E /* HSQLParameterValue.m */; };
 		BC4557E11776E6A600D7C71E /* HSQLFunctionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557E01776E6A600D7C71E /* HSQLFunctionContext.m */; };
 		BC4557E61777C87000D7C71E /* HSQLCollationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557E51777C87000D7C71E /* HSQLCollationTests.m */; };
 		BC4557E81777C87C00D7C71E /* HSQLFunctionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */; };
 		BC4557EC1777CAC300D7C71E /* letters.sql in Resources */ = {isa = PBXBuildFile; fileRef = BC4557EB1777CAC300D7C71E /* letters.sql */; };
-		BC4557ED1777CDF600D7C71E /* HSQLDatabase+Collations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */; };
-		BC4557EE1777CDF600D7C71E /* HSQLDatabase+Functions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557D91776E0FE00D7C71E /* HSQLDatabase+Functions.h */; };
-		BC4557EF1777CDF600D7C71E /* HSQLFunctionContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */; };
-		BC4557F21777CEB500D7C71E /* HSQLDatabase+Pragmas.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557F11777CEB500D7C71E /* HSQLDatabase+Pragmas.m */; };
-		BC4557F41777CF5300D7C71E /* HSQLDatabase+Pragmas.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BC4557F01777CEB500D7C71E /* HSQLDatabase+Pragmas.h */; };
+		BC4557F21777CEB500D7C71E /* HSQLSession+Pragmas.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4557F11777CEB500D7C71E /* HSQLSession+Pragmas.m */; };
 		BCDBBC211775F9C8005FD819 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC201775F9C8005FD819 /* Foundation.framework */; };
-		BCDBBC261775F9C8005FD819 /* HSQLite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC251775F9C8005FD819 /* HSQLite.h */; };
 		BCDBBC2F1775F9C9005FD819 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC2E1775F9C9005FD819 /* XCTest.framework */; };
 		BCDBBC301775F9C9005FD819 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC201775F9C8005FD819 /* Foundation.framework */; };
 		BCDBBC351775F9C9005FD819 /* libHSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC1D1775F9C8005FD819 /* libHSQLite.a */; };
 		BCDBBC3B1775F9C9005FD819 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCDBBC391775F9C9005FD819 /* InfoPlist.strings */; };
-		BCDBBC481775FC34005FD819 /* HSQLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC471775FC34005FD819 /* HSQLDatabase.m */; };
+		BCDBBC481775FC34005FD819 /* HSQLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC471775FC34005FD819 /* HSQLSession.m */; };
 		BCDBBC4A1775FC61005FD819 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC491775FC61005FD819 /* libsqlite3.dylib */; };
 		BCDBBC4D17760B1F005FD819 /* HSQLStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC4C17760B1F005FD819 /* HSQLStatement.m */; };
 		BCDBBC5417763FDB005FD819 /* HSQLColumnValue.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC5317763FDB005FD819 /* HSQLColumnValue.m */; };
 		BCDBBC57177651AD005FD819 /* HSQLRow.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC56177651AD005FD819 /* HSQLRow.m */; };
-		BCDBBC591776A0DA005FD819 /* HSQLDatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC581776A0DA005FD819 /* HSQLDatabaseTests.m */; };
-		BCDBBC5A1776A248005FD819 /* HSQLDatabase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC461775FC34005FD819 /* HSQLDatabase.h */; };
-		BCDBBC5B1776A248005FD819 /* HSQLStatement.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */; };
-		BCDBBC5C1776A248005FD819 /* HSQLValue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BCDBBC4F17762A16005FD819 /* HSQLValue.h */; };
+		BCDBBC591776A0DA005FD819 /* HSQLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC581776A0DA005FD819 /* HSQLSessionTests.m */; };
+		BCDBBC5A1776A248005FD819 /* HSQLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDBBC461775FC34005FD819 /* HSQLSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCDBBC5D1776A291005FD819 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDBBC491775FC61005FD819 /* libsqlite3.dylib */; };
+		BCFFB984179C8B1400315F80 /* HSQLite.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDBBC251775F9C8005FD819 /* HSQLite.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB985179C8B4800315F80 /* HSQLSession+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BC002B3E178BC13E006FA4B8 /* HSQLSession+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BCFFB986179C8B4E00315F80 /* HSQLStatement.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB987179C8B5400315F80 /* HSQLStatement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BC002B3F178BC163006FA4B8 /* HSQLStatement+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BCFFB988179C8B5B00315F80 /* HSQLRow.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDBBC55177651AD005FD819 /* HSQLRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB989179C8B6100315F80 /* HSQLRow+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BC002B40178BC17D006FA4B8 /* HSQLRow+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BCFFB98A179C8B6600315F80 /* HSQLValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDBBC4F17762A16005FD819 /* HSQLValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB98B179C8B6D00315F80 /* HSQLColumnValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDBBC5217763FDB005FD819 /* HSQLColumnValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BCFFB98C179C8B7300315F80 /* HSQLBackupSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BC2C9CAD178C7B07009F291A /* HSQLBackupSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB98D179C8B7C00315F80 /* HSQLSession+Pragmas.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4557F01777CEB500D7C71E /* HSQLSession+Pragmas.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB98E179C8B8000315F80 /* HSQLSession+Collations.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4557D61776DC1D00D7C71E /* HSQLSession+Collations.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB98F179C8B8400315F80 /* HSQLSession+Functions.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4557D91776E0FE00D7C71E /* HSQLSession+Functions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB990179C8B8C00315F80 /* HSQLFunctionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCFFB991179C8B9000315F80 /* HSQLFunctionContext+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BC002B41178BC1A7006FA4B8 /* HSQLFunctionContext+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BCFFB992179C8B9700315F80 /* HSQLParameterValue.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4557DC1776E3A600D7C71E /* HSQLParameterValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,51 +58,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		BCDBBC1B1775F9C8005FD819 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				BC2C9CB2178CA1B1009F291A /* HSQLBackupSession.h in CopyFiles */,
-				BC4557F41777CF5300D7C71E /* HSQLDatabase+Pragmas.h in CopyFiles */,
-				BC4557ED1777CDF600D7C71E /* HSQLDatabase+Collations.h in CopyFiles */,
-				BC4557EE1777CDF600D7C71E /* HSQLDatabase+Functions.h in CopyFiles */,
-				BC4557EF1777CDF600D7C71E /* HSQLFunctionContext.h in CopyFiles */,
-				BC4557D51776BDF300D7C71E /* HSQLRow.h in CopyFiles */,
-				BCDBBC5A1776A248005FD819 /* HSQLDatabase.h in CopyFiles */,
-				BCDBBC5B1776A248005FD819 /* HSQLStatement.h in CopyFiles */,
-				BCDBBC5C1776A248005FD819 /* HSQLValue.h in CopyFiles */,
-				BCDBBC261775F9C8005FD819 /* HSQLite.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		BC002B3E178BC13E006FA4B8 /* HSQLDatabase+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Private.h"; sourceTree = "<group>"; };
+		BC002B3E178BC13E006FA4B8 /* HSQLSession+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLSession+Private.h"; sourceTree = "<group>"; };
 		BC002B3F178BC163006FA4B8 /* HSQLStatement+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLStatement+Private.h"; sourceTree = "<group>"; };
 		BC002B40178BC17D006FA4B8 /* HSQLRow+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLRow+Private.h"; sourceTree = "<group>"; };
 		BC002B41178BC1A7006FA4B8 /* HSQLFunctionContext+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLFunctionContext+Private.h"; sourceTree = "<group>"; };
 		BC2C9CAC178C78F9009F291A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BC2C9CAD178C7B07009F291A /* HSQLBackupSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLBackupSession.h; sourceTree = "<group>"; };
 		BC2C9CAE178C7B07009F291A /* HSQLBackupSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLBackupSession.m; sourceTree = "<group>"; };
-		BC2C9CB0178CA16F009F291A /* HSQLBackupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLBackupTests.m; sourceTree = "<group>"; };
+		BC2C9CB0178CA16F009F291A /* HSQLBackupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HSQLBackupTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLStatementTests.m; sourceTree = "<group>"; };
-		BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Collations.h"; sourceTree = "<group>"; };
-		BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Collations.m"; sourceTree = "<group>"; };
-		BC4557D91776E0FE00D7C71E /* HSQLDatabase+Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Functions.h"; sourceTree = "<group>"; };
-		BC4557DA1776E0FE00D7C71E /* HSQLDatabase+Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Functions.m"; sourceTree = "<group>"; };
+		BC4557D61776DC1D00D7C71E /* HSQLSession+Collations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLSession+Collations.h"; sourceTree = "<group>"; };
+		BC4557D71776DC1D00D7C71E /* HSQLSession+Collations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLSession+Collations.m"; sourceTree = "<group>"; };
+		BC4557D91776E0FE00D7C71E /* HSQLSession+Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLSession+Functions.h"; sourceTree = "<group>"; };
+		BC4557DA1776E0FE00D7C71E /* HSQLSession+Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLSession+Functions.m"; sourceTree = "<group>"; };
 		BC4557DC1776E3A600D7C71E /* HSQLParameterValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLParameterValue.h; sourceTree = "<group>"; };
 		BC4557DD1776E3A600D7C71E /* HSQLParameterValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLParameterValue.m; sourceTree = "<group>"; };
 		BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLFunctionContext.h; sourceTree = "<group>"; };
 		BC4557E01776E6A600D7C71E /* HSQLFunctionContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLFunctionContext.m; sourceTree = "<group>"; };
-		BC4557E51777C87000D7C71E /* HSQLCollationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLCollationTests.m; sourceTree = "<group>"; };
+		BC4557E51777C87000D7C71E /* HSQLCollationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HSQLCollationTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLFunctionTests.m; sourceTree = "<group>"; };
 		BC4557EB1777CAC300D7C71E /* letters.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = letters.sql; sourceTree = "<group>"; };
-		BC4557F01777CEB500D7C71E /* HSQLDatabase+Pragmas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLDatabase+Pragmas.h"; sourceTree = "<group>"; };
-		BC4557F11777CEB500D7C71E /* HSQLDatabase+Pragmas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLDatabase+Pragmas.m"; sourceTree = "<group>"; };
+		BC4557F01777CEB500D7C71E /* HSQLSession+Pragmas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HSQLSession+Pragmas.h"; sourceTree = "<group>"; };
+		BC4557F11777CEB500D7C71E /* HSQLSession+Pragmas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HSQLSession+Pragmas.m"; sourceTree = "<group>"; };
 		BCDBBC1D1775F9C8005FD819 /* libHSQLite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHSQLite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDBBC201775F9C8005FD819 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BCDBBC241775F9C8005FD819 /* HSQLite-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HSQLite-Prefix.pch"; sourceTree = "<group>"; };
@@ -105,8 +89,8 @@
 		BCDBBC2E1775F9C9005FD819 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BCDBBC381775F9C9005FD819 /* HSQLiteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HSQLiteTests-Info.plist"; sourceTree = "<group>"; };
 		BCDBBC3A1775F9C9005FD819 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BCDBBC461775FC34005FD819 /* HSQLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLDatabase.h; sourceTree = "<group>"; };
-		BCDBBC471775FC34005FD819 /* HSQLDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLDatabase.m; sourceTree = "<group>"; };
+		BCDBBC461775FC34005FD819 /* HSQLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLSession.h; sourceTree = "<group>"; };
+		BCDBBC471775FC34005FD819 /* HSQLSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLSession.m; sourceTree = "<group>"; };
 		BCDBBC491775FC61005FD819 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLStatement.h; sourceTree = "<group>"; };
 		BCDBBC4C17760B1F005FD819 /* HSQLStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLStatement.m; sourceTree = "<group>"; };
@@ -115,7 +99,7 @@
 		BCDBBC5317763FDB005FD819 /* HSQLColumnValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLColumnValue.m; sourceTree = "<group>"; };
 		BCDBBC55177651AD005FD819 /* HSQLRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQLRow.h; sourceTree = "<group>"; };
 		BCDBBC56177651AD005FD819 /* HSQLRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQLRow.m; sourceTree = "<group>"; };
-		BCDBBC581776A0DA005FD819 /* HSQLDatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSQLDatabaseTests.m; path = HSQLiteTests/HSQLDatabaseTests.m; sourceTree = SOURCE_ROOT; };
+		BCDBBC581776A0DA005FD819 /* HSQLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = HSQLSessionTests.m; path = HSQLiteTests/HSQLSessionTests.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +129,8 @@
 		BC4557E21777C82100D7C71E /* Collations */ = {
 			isa = PBXGroup;
 			children = (
-				BC4557D61776DC1D00D7C71E /* HSQLDatabase+Collations.h */,
-				BC4557D71776DC1D00D7C71E /* HSQLDatabase+Collations.m */,
+				BC4557D61776DC1D00D7C71E /* HSQLSession+Collations.h */,
+				BC4557D71776DC1D00D7C71E /* HSQLSession+Collations.m */,
 			);
 			name = Collations;
 			sourceTree = "<group>";
@@ -154,8 +138,8 @@
 		BC4557E31777C82900D7C71E /* Functions */ = {
 			isa = PBXGroup;
 			children = (
-				BC4557D91776E0FE00D7C71E /* HSQLDatabase+Functions.h */,
-				BC4557DA1776E0FE00D7C71E /* HSQLDatabase+Functions.m */,
+				BC4557D91776E0FE00D7C71E /* HSQLSession+Functions.h */,
+				BC4557DA1776E0FE00D7C71E /* HSQLSession+Functions.m */,
 				BC4557DF1776E6A600D7C71E /* HSQLFunctionContext.h */,
 				BC002B41178BC1A7006FA4B8 /* HSQLFunctionContext+Private.h */,
 				BC4557E01776E6A600D7C71E /* HSQLFunctionContext.m */,
@@ -168,9 +152,9 @@
 		BC4557E41777C83600D7C71E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				BCDBBC461775FC34005FD819 /* HSQLDatabase.h */,
-				BC002B3E178BC13E006FA4B8 /* HSQLDatabase+Private.h */,
-				BCDBBC471775FC34005FD819 /* HSQLDatabase.m */,
+				BCDBBC461775FC34005FD819 /* HSQLSession.h */,
+				BC002B3E178BC13E006FA4B8 /* HSQLSession+Private.h */,
+				BCDBBC471775FC34005FD819 /* HSQLSession.m */,
 				BCDBBC4B17760B1F005FD819 /* HSQLStatement.h */,
 				BC002B3F178BC163006FA4B8 /* HSQLStatement+Private.h */,
 				BCDBBC4C17760B1F005FD819 /* HSQLStatement.m */,
@@ -187,8 +171,8 @@
 		BC4557F31777CEBB00D7C71E /* Pragmas */ = {
 			isa = PBXGroup;
 			children = (
-				BC4557F01777CEB500D7C71E /* HSQLDatabase+Pragmas.h */,
-				BC4557F11777CEB500D7C71E /* HSQLDatabase+Pragmas.m */,
+				BC4557F01777CEB500D7C71E /* HSQLSession+Pragmas.h */,
+				BC4557F11777CEB500D7C71E /* HSQLSession+Pragmas.m */,
 			);
 			name = Pragmas;
 			sourceTree = "<group>";
@@ -257,7 +241,7 @@
 		BCDBBC361775F9C9005FD819 /* HSQLiteTests */ = {
 			isa = PBXGroup;
 			children = (
-				BCDBBC581776A0DA005FD819 /* HSQLDatabaseTests.m */,
+				BCDBBC581776A0DA005FD819 /* HSQLSessionTests.m */,
 				BC4557D31776B18E00D7C71E /* HSQLStatementTests.m */,
 				BC4557E51777C87000D7C71E /* HSQLCollationTests.m */,
 				BC4557E71777C87C00D7C71E /* HSQLFunctionTests.m */,
@@ -279,6 +263,32 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		BCFFB983179C8ADC00315F80 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFFB992179C8B9700315F80 /* HSQLParameterValue.h in Headers */,
+				BCDBBC5A1776A248005FD819 /* HSQLSession.h in Headers */,
+				BCFFB98E179C8B8000315F80 /* HSQLSession+Collations.h in Headers */,
+				BCFFB987179C8B5400315F80 /* HSQLStatement+Private.h in Headers */,
+				BCFFB991179C8B9000315F80 /* HSQLFunctionContext+Private.h in Headers */,
+				BCFFB985179C8B4800315F80 /* HSQLSession+Private.h in Headers */,
+				BCFFB98B179C8B6D00315F80 /* HSQLColumnValue.h in Headers */,
+				BCFFB988179C8B5B00315F80 /* HSQLRow.h in Headers */,
+				BCFFB989179C8B6100315F80 /* HSQLRow+Private.h in Headers */,
+				BCFFB98F179C8B8400315F80 /* HSQLSession+Functions.h in Headers */,
+				BCFFB986179C8B4E00315F80 /* HSQLStatement.h in Headers */,
+				BCFFB98C179C8B7300315F80 /* HSQLBackupSession.h in Headers */,
+				BCFFB98A179C8B6600315F80 /* HSQLValue.h in Headers */,
+				BCFFB984179C8B1400315F80 /* HSQLite.h in Headers */,
+				BCFFB990179C8B8C00315F80 /* HSQLFunctionContext.h in Headers */,
+				BCFFB98D179C8B7C00315F80 /* HSQLSession+Pragmas.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		BCDBBC1C1775F9C8005FD819 /* HSQLite */ = {
 			isa = PBXNativeTarget;
@@ -286,7 +296,7 @@
 			buildPhases = (
 				BCDBBC191775F9C8005FD819 /* Sources */,
 				BCDBBC1A1775F9C8005FD819 /* Frameworks */,
-				BCDBBC1B1775F9C8005FD819 /* CopyFiles */,
+				BCFFB983179C8ADC00315F80 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -364,16 +374,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCDBBC481775FC34005FD819 /* HSQLDatabase.m in Sources */,
+				BCDBBC481775FC34005FD819 /* HSQLSession.m in Sources */,
 				BCDBBC4D17760B1F005FD819 /* HSQLStatement.m in Sources */,
 				BC2C9CAF178C7B07009F291A /* HSQLBackupSession.m in Sources */,
 				BCDBBC57177651AD005FD819 /* HSQLRow.m in Sources */,
 				BC4557E11776E6A600D7C71E /* HSQLFunctionContext.m in Sources */,
 				BCDBBC5417763FDB005FD819 /* HSQLColumnValue.m in Sources */,
 				BC4557DE1776E3A600D7C71E /* HSQLParameterValue.m in Sources */,
-				BC4557DB1776E0FE00D7C71E /* HSQLDatabase+Functions.m in Sources */,
-				BC4557D81776DC1D00D7C71E /* HSQLDatabase+Collations.m in Sources */,
-				BC4557F21777CEB500D7C71E /* HSQLDatabase+Pragmas.m in Sources */,
+				BC4557DB1776E0FE00D7C71E /* HSQLSession+Functions.m in Sources */,
+				BC4557D81776DC1D00D7C71E /* HSQLSession+Collations.m in Sources */,
+				BC4557F21777CEB500D7C71E /* HSQLSession+Pragmas.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCDBBC591776A0DA005FD819 /* HSQLDatabaseTests.m in Sources */,
+				BCDBBC591776A0DA005FD819 /* HSQLSessionTests.m in Sources */,
 				BC2C9CB1178CA16F009F291A /* HSQLBackupTests.m in Sources */,
 				BC4557E61777C87000D7C71E /* HSQLCollationTests.m in Sources */,
 				BC4557D41776B18E00D7C71E /* HSQLStatementTests.m in Sources */,

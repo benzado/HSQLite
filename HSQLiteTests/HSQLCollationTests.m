@@ -11,7 +11,7 @@
 
 @interface HSQLCollationTests : XCTestCase
 {
-    HSQLDatabase *db;
+    HSQLSession *db;
 }
 @end
 
@@ -25,7 +25,7 @@
     NSString *sql = [NSString stringWithContentsOfURL:sqlURL encoding:NSUTF8StringEncoding error:&error];
     XCTAssertNotNil(sql);
     XCTAssertNil(error);
-    db = [HSQLDatabase databaseInMemory];
+    db = [HSQLSession sessionWithMemoryDatabase];
     [db executeQuery:sql error:&error];
     XCTAssertNil(error);
 }
@@ -76,9 +76,9 @@
 
 - (void)testLocalizedCollation
 {
-    [db setUndefinedCollationHandler:^(HSQLDatabase *database, NSString *neededCollationName) {
+    [db setUndefinedCollationHandler:^(HSQLSession *session, NSString *neededCollationName) {
         if ([neededCollationName isEqualToString:@"localized"]) {
-            [database defineCollationNamed:@"localized" comparator:^NSComparisonResult(id obj1, id obj2) {
+            [session defineCollationNamed:@"localized" comparator:^NSComparisonResult(id obj1, id obj2) {
                 return [obj1 localizedCompare:obj2];
             }];
         }
@@ -94,7 +94,7 @@
 - testUnknownCollation
 {
     __block NSString *name = nil;
-    [db setUndefinedCollationHandler:^(HSQLDatabase *db, NSString *neededCollationName) {
+    [db setUndefinedCollationHandler:^(HSQLSession *db, NSString *neededCollationName) {
         name = neededCollationName;
     }];
     NSError *error = nil;

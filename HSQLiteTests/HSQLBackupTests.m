@@ -11,7 +11,7 @@
 
 @interface HSQLBackupTests : XCTestCase
 {
-    HSQLDatabase *sourceDatabase;
+    HSQLSession *sourceDatabase;
 }
 @end
 
@@ -20,7 +20,7 @@
 - (void)setUp
 {
     [super setUp];
-    sourceDatabase = [HSQLDatabase databaseInMemory];
+    sourceDatabase = [HSQLSession sessionWithMemoryDatabase];
     [sourceDatabase executeQuery:@"CREATE TABLE foo ( bar ); INSERT INTO foo VALUES (random());" error:nil];
     HSQLStatement *stmt = [sourceDatabase statementWithQuery:@"INSERT INTO foo SELECT random() FROM foo" error:nil];
     for (int i = 0; i < 19; i++) {
@@ -36,7 +36,7 @@
 
 - (void)testCopy
 {
-    HSQLDatabase *destDatabase = [HSQLDatabase databaseInMemory];
+    HSQLSession *destDatabase = [HSQLSession sessionWithMemoryDatabase];
     HSQLBackupSession *backup = [sourceDatabase backupSessionWithDestinationDatabase:destDatabase];
     XCTAssertNotNil(backup);
     NSError *error = nil;
@@ -48,7 +48,7 @@
 
 - (void)testPrematureWriteToDestination
 {
-    HSQLDatabase *destDatabase = [HSQLDatabase databaseInMemory];
+    HSQLSession *destDatabase = [HSQLSession sessionWithMemoryDatabase];
     HSQLBackupSession *backup = [sourceDatabase backupSessionWithDestinationDatabase:destDatabase];
     XCTAssertNotNil(backup);
     NSError *error = nil;
@@ -61,7 +61,7 @@
 
 - (void)testCopyOnQueue
 {
-    HSQLDatabase *destDatabase = [HSQLDatabase databaseInMemory];
+    HSQLSession *destDatabase = [HSQLSession sessionWithMemoryDatabase];
     HSQLBackupSession *backup = [sourceDatabase backupSessionWithDestinationDatabase:destDatabase];
     XCTAssertNotNil(backup);
     dispatch_queue_t q = dispatch_queue_create("test", NULL);

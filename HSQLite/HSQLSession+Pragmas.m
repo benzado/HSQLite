@@ -1,17 +1,17 @@
 //
-//  HSQLDatabase+Pragmas.m
+//  HSQLSession+Pragmas.m
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/23/13.
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase+Pragmas.h"
+#import "HSQLSession+Pragmas.h"
 #import "HSQLStatement.h"
 #import "HSQLRow.h"
 #import "HSQLValue.h"
 
-@implementation HSQLDatabase (Pragmas)
+@implementation HSQLSession (Pragmas)
 
 - (int)intForPragmaQuery:(NSString *)query
 {

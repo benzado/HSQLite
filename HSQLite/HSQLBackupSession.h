@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <HSQLite/HSQLDatabase.h>
+#import <HSQLite/HSQLSession.h>
 
 @interface HSQLBackupSession : NSObject
 {
@@ -25,6 +25,6 @@
 - (void)copyPagesAsynchronouslyWithProgressHandler:(void(^)())progressHandler completionHandler:(void(^)(NSError *error))completionHandler;
 @end
 
-@interface HSQLDatabase (Backup)
-- (HSQLBackupSession *)backupSessionWithDestinationDatabase:(HSQLDatabase *)destinationDatabase;
+@interface HSQLSession (Backup)
+- (HSQLBackupSession *)backupSessionWithDestinationDatabase:(HSQLSession *)destinationDatabase;
 @end

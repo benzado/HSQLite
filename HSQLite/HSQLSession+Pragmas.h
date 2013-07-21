@@ -1,12 +1,12 @@
 //
-//  HSQLDatabase+Pragmas.h
+//  HSQLSession+Pragmas.h
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/23/13.
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase.h"
+#import "HSQLSession.h"
 
 typedef NS_ENUM(int, HSQLAutoVacuumMode) {
     HSQLAutoVacuumModeOff,
@@ -14,7 +14,7 @@ typedef NS_ENUM(int, HSQLAutoVacuumMode) {
     HSQLAutoVacuumModeIncremental
 };
 
-@interface HSQLDatabase (Pragmas)
+@interface HSQLSession (Pragmas)
 @property (nonatomic) uint32_t applicationID;
 @property (nonatomic) HSQLAutoVacuumMode autoVacuumMode;
 @property (nonatomic) BOOL autoIndexingEnabled;

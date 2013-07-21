@@ -11,7 +11,7 @@
 
 @interface HSQLStatementTests : XCTestCase
 {
-    HSQLDatabase *db;
+    HSQLSession *db;
 }
 @end
 
@@ -20,7 +20,7 @@
 - (void)setUp
 {
     [super setUp];
-    db = [HSQLDatabase databaseInMemory];
+    db = [HSQLSession sessionWithMemoryDatabase];
 }
 
 - (void)tearDown

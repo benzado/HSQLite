@@ -1,5 +1,5 @@
 //
-//  HSQLDatabase.h
+//  HSQLSession.h
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/22/13.
@@ -11,30 +11,30 @@
 extern NSString * const HSQLExceptionName;
 extern NSString * const HSQLErrorDomain;
 
-@class HSQLDatabase;
+@class HSQLSession;
 @class HSQLStatement;
 
-typedef NS_OPTIONS(int, HSQLDatabaseFlags) {
-    HSQLDatabaseOpenReadOnly = SQLITE_OPEN_READONLY,
-    HSQLDatabaseOpenReadWrite = SQLITE_OPEN_READWRITE,
-    HSQLDatabaseOpenCreate = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE
+typedef NS_OPTIONS(int, HSQLSessionFlags) {
+    HSQLSessionOpenReadOnly = SQLITE_OPEN_READONLY,
+    HSQLSessionOpenReadWrite = SQLITE_OPEN_READWRITE,
+    HSQLSessionOpenCreate = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE
 };
 
-typedef BOOL(^HSQLBusyHandler)(HSQLDatabase *db, int numberOfLockAttempts);
+typedef BOOL(^HSQLBusyHandler)(HSQLSession *db, int numberOfLockAttempts);
 
-typedef void(^HSQLUndefinedCollationHandler)(HSQLDatabase *db, NSString *neededCollationName);
+typedef void(^HSQLUndefinedCollationHandler)(HSQLSession *db, NSString *neededCollationName);
 
-@interface HSQLDatabase : NSObject
+@interface HSQLSession : NSObject
 {
     sqlite3 *_db;
     HSQLBusyHandler busyHandler;
     HSQLUndefinedCollationHandler collationNeededHandler;
 }
-+ (instancetype)databaseWithPath:(NSString *)path;
-+ (instancetype)databaseWithTemporaryFile;
-+ (instancetype)databaseInMemory;
-+ (instancetype)databaseNamed:(NSString *)name;
-- (instancetype)initWithPath:(NSString *)path flags:(HSQLDatabaseFlags)flags VFSName:(NSString *)VFSName;
++ (instancetype)sessionWithFileAtPath:(NSString *)path;
++ (instancetype)sessionWithTemporaryFile;
++ (instancetype)sessionWithMemoryDatabase;
++ (instancetype)sessionWithFileNamed:(NSString *)name;
+- (instancetype)initWithPath:(NSString *)path flags:(HSQLSessionFlags)flags VFSName:(NSString *)VFSName;
 - (void)close;
 - (NSString *)absolutePath;
 - (BOOL)isReadOnly;
@@ -57,5 +57,4 @@ typedef void(^HSQLUndefinedCollationHandler)(HSQLDatabase *db, NSString *neededC
  - progress callback
  - authorizor callback
  - database limits
- 
  */

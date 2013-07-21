@@ -10,7 +10,7 @@
 #define HSQLite_HSQLStatement_Private_h
 
 @interface HSQLStatement (Private)
-- (instancetype)initWithDatabase:(HSQLDatabase *)database stmt:(sqlite3_stmt *)stmt;
+- (instancetype)initWithSession:(HSQLSession *)session stmt:(sqlite3_stmt *)stmt;
 @end
 
 #endif

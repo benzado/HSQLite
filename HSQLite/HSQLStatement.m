@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase.h"
-#import "HSQLDatabase+Private.h"
+#import "HSQLSession.h"
+#import "HSQLSession+Private.h"
 #import "HSQLStatement.h"
 #import "HSQLRow.h"
 #import "HSQLRow+Private.h"
 
 @implementation HSQLStatement
 
-- (instancetype)initWithDatabase:(HSQLDatabase *)database stmt:(sqlite3_stmt *)stmt
+- (instancetype)initWithSession:(HSQLSession *)session stmt:(sqlite3_stmt *)stmt
 {
     if ((self = [super init])) {
-        _database = database;
+        _session = session;
         _stmt = stmt;
     }
     return self;
@@ -143,7 +143,7 @@
                 done = YES;
                 break;
             default:
-                [HSQLDatabase raiseExceptionOrGetError:NULL forResultCode:r];
+                [HSQLSession raiseExceptionOrGetError:NULL forResultCode:r];
                 break;
         }
     }

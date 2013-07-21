@@ -1,12 +1,12 @@
 //
-//  HSQLDatabase+Functions.m
+//  HSQLSession+Functions.m
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/23/13.
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase+Functions.h"
+#import "HSQLSession+Functions.h"
 #import "HSQLFunctionContext.h"
 #import "HSQLParameterValue.h"
 #import "HSQLFunctionContext+Private.h"
@@ -50,7 +50,7 @@ void HSQLFunctionDestroy(void *ptr)
     CFRelease(ptr);
 }
 
-@implementation HSQLDatabase (Functions)
+@implementation HSQLSession (Functions)
 
 - (void)defineScalarFunction:(NSString *)name numberOfArguments:(int)nArg block:(HSQLScalarFunction)block
 {

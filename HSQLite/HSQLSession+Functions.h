@@ -1,12 +1,12 @@
 //
-//  HSQLDatabase+Functions.h
+//  HSQLSession+Functions.h
 //  HSQLite
 //
 //  Created by Benjamin Ragheb on 6/23/13.
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
-#import "HSQLDatabase.h"
+#import "HSQLSession.h"
 
 @class HSQLFunctionContext;
 @class HSQLAggregateFunctionContext;
@@ -16,7 +16,7 @@ typedef void(^HSQLAggregateFunction)(HSQLAggregateFunctionContext *context, NSAr
 
 #define HSQLFunctionVariableArgumentCount -1
 
-@interface HSQLDatabase (Functions)
+@interface HSQLSession (Functions)
 - (void)defineScalarFunction:(NSString *)name numberOfArguments:(int)nArg block:(HSQLScalarFunction)block;
 - (void)defineAggregateFunction:(NSString *)name numberOfArguments:(int)nArg block:(HSQLAggregateFunction)block;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "HSQLBackupSession.h"
-#import "HSQLDatabase+Private.h"
+#import "HSQLSession+Private.h"
 
 @implementation HSQLBackupSession
 
@@ -69,7 +69,7 @@
             // non-fatal errors, try again later
             return NO;
         default: {
-            [HSQLDatabase raiseExceptionOrGetError:error forResultCode:r];
+            [HSQLSession raiseExceptionOrGetError:error forResultCode:r];
             return YES;
         }
     }
@@ -124,9 +124,9 @@ typedef void((^HSQLRecursiveBlock)(id));
 
 @end
 
-@implementation HSQLDatabase (Backup)
+@implementation HSQLSession (Backup)
 
-- (HSQLBackupSession *)backupSessionWithSourceName:(NSString *)sourceName destinationDatabase:(HSQLDatabase *)destinationDatabase name:(NSString *)destinationName
+- (HSQLBackupSession *)backupSessionWithSourceName:(NSString *)sourceName destinationDatabase:(HSQLSession *)destinationDatabase name:(NSString *)destinationName
 {
     const char *src = [sourceName UTF8String];
     const char *dst = [destinationName UTF8String];
@@ -139,7 +139,7 @@ typedef void((^HSQLRecursiveBlock)(id));
     }
 }
 
-- (HSQLBackupSession *)backupSessionWithDestinationDatabase:(HSQLDatabase *)destinationDatabase
+- (HSQLBackupSession *)backupSessionWithDestinationDatabase:(HSQLSession *)destinationDatabase
 {
     return [self backupSessionWithSourceName:@"main" destinationDatabase:destinationDatabase name:@"main"];
 }
