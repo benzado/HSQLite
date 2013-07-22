@@ -17,3 +17,4 @@
 #import <HSQLite/HSQLSession+Functions.h>
 #import <HSQLite/HSQLFunctionContext.h>
 #import <HSQLite/HSQLBackupOperation.h>
+#import <HSQLite/HSQLBlob.h>

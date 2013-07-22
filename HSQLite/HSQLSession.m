@@ -53,7 +53,7 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
         case SQLITE_PROTOCOL: return @"Database lock protocol error";
         case SQLITE_EMPTY: return @"Database is empty";
         case SQLITE_SCHEMA: return @"The database schema changed";
-        case SQLITE_TOOBIG: return @"String or BLOB exceeds size limit";
+        case SQLITE_TOOBIG: return @"String or Blob exceeds size limit";
         case SQLITE_CONSTRAINT: return @"Abort due to constraint violation";
         case SQLITE_MISMATCH: return @"Data type mismatch";
         case SQLITE_MISUSE: return @"Library used incorrectly";
@@ -163,6 +163,11 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
 - (void)dealloc
 {
     [self close];
+}
+
+- (sqlite3 *)handle
+{
+    return _db;
 }
 
 - (void)releaseMemory

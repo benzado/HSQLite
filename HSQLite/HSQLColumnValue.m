@@ -31,7 +31,7 @@
     return sqlite3_column_type(_stmt, _idx) == SQLITE_NULL;
 }
 
-- (NSData *)blobValue
+- (NSData *)dataValue
 {
     const void *bytes = sqlite3_column_blob(_stmt, _idx);
     if (bytes) {

@@ -14,6 +14,7 @@
 - (void)raiseExceptionOrGetError:(NSError **)error;
 - (int)busyForNumberOfLockAttempts:(int)attempts;
 - (void)collationNeededWithName:(NSString *)name;
+- (sqlite3 *)handle;
 @end
 
 #endif

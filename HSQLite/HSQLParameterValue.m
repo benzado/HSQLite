@@ -28,7 +28,7 @@
     return sqlite3_value_type(_value) == SQLITE_NULL;
 }
 
-- (NSData *)blobValue
+- (NSData *)dataValue
 {
     const void *bytes = sqlite3_value_blob(_value);
     if (bytes) {

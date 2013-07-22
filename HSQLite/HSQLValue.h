@@ -11,7 +11,7 @@
 typedef NS_ENUM(int, HSQLValueType) {
     HSQLValueTypeInteger = SQLITE_INTEGER,
     HSQLValueTypeFloat = SQLITE_FLOAT,
-    HSQLValueTypeBlob = SQLITE_BLOB,
+    HSQLValueTypeData = SQLITE_BLOB,
     HSQLValueTypeNull = SQLITE_NULL,
     HSQLValueTypeText = SQLITE3_TEXT
 };
@@ -19,7 +19,7 @@ typedef NS_ENUM(int, HSQLValueType) {
 @protocol HSQLValue <NSObject>
 - (HSQLValueType)type;
 - (BOOL)isNull;
-- (NSData *)blobValue;
+- (NSData *)dataValue;
 - (double)doubleValue;
 - (int)intValue;
 - (sqlite3_int64)int64Value;
