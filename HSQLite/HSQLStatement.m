@@ -9,6 +9,7 @@
 #import "HSQLSession.h"
 #import "HSQLSession+Private.h"
 #import "HSQLStatement.h"
+#import "HSQLStatement+Private.h"
 #import "HSQLRow.h"
 #import "HSQLRow+Private.h"
 
@@ -85,47 +86,56 @@
 - (void)setObject:(id)anObject atIndexedSubscript:(NSUInteger)idx
 {
     int r = SQLITE_FAIL;
-    if (anObject == nil || anObject == [NSNull null]) {
+
+    if (anObject == nil) {
         r = sqlite3_bind_null(_stmt, idx);
     }
-    else if ([anObject isKindOfClass:[NSString class]]) {
-        NSData *data = [anObject dataUsingEncoding:NSUTF8StringEncoding];
-        r = sqlite3_bind_text(_stmt, idx, [data bytes], [data length], SQLITE_TRANSIENT);
-    }
-    else if ([anObject isKindOfClass:[NSData class]]) {
-        r = sqlite3_bind_blob(_stmt, idx, [anObject bytes], [anObject length], SQLITE_TRANSIENT);
-    }
-    else if ([anObject isKindOfClass:[NSNumber class]]) {
-        const char *t = [anObject objCType];
-        NSAssert(t != NULL, @"NSNumber must have an objcType encoding");
-        switch (*t) {
-            case 'f':
-            case 'd':
-                r = sqlite3_bind_double(_stmt, idx, [anObject doubleValue]);
-                break;
-            case 'q':
-            case 'Q':
-                r = sqlite3_bind_int64(_stmt, idx, [anObject longLongValue]);
-            default:
-                r = sqlite3_bind_int(_stmt, idx, [anObject intValue]);
-                break;
-        }
+    else if ([anObject respondsToSelector:@selector(HSQLStatement_bindValueToStmt:column:)]) {
+        r = [anObject HSQLStatement_bindValueToStmt:_stmt column:idx];
     }
     else {
         [NSException raise:NSInvalidArgumentException format:@"can't use object of class %@ as parameter", [anObject class]];
     }
+
     if (r == SQLITE_RANGE) {
         [NSException raise:NSRangeException format:@"parameter index %d out of range", idx];
     }
+    if (r != SQLITE_OK) {
+        [HSQLSession raiseExceptionOrGetError:nil forResultCode:r];
+    }
+
+    if (anObject == nil) {
+        [_boundObjects removeObjectForKey:@(idx)];
+    } else {
+        if (_boundObjects == nil) {
+            _boundObjects = [[NSMutableDictionary alloc] initWithCapacity:self.numberOfParameters];
+        }
+        [_boundObjects setObject:anObject forKey:@(idx)];
+    }
 }
 
-- (void)setObject:(id)anObject forKeyedSubscript:(NSString *)key
+- (id)objectAtIndexedSubscript:(NSUInteger)index
+{
+    return [_boundObjects objectForKey:@(index)];
+}
+
+- (NSUInteger)indexForKey:(NSString *)key
 {
     int idx = sqlite3_bind_parameter_index(_stmt, [key UTF8String]);
     if (idx == 0) {
         [NSException raise:NSInvalidArgumentException format:@"unknown parameter name '%@'", key];
     }
-    [self setObject:anObject atIndexedSubscript:idx];
+    return idx;
+}
+
+- (void)setObject:(id)anObject forKeyedSubscript:(NSString *)key
+{
+    [self setObject:anObject atIndexedSubscript:[self indexForKey:key]];
+}
+
+- (id)objectforKeyedSubscript:(NSString *)key
+{
+    return [self objectAtIndexedSubscript:[self indexForKey:key]];
 }
 
 - (void)executeWithBlock:(void(^)(HSQLRow *row, BOOL *stop))block
@@ -154,8 +164,10 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     [self executeWithBlock:^(HSQLRow *row, BOOL *stop) {
-        id item = block(row, stop);
+        id <NSObject> item = block(row, stop);
         if (item) {
+            NSAssert(![item isKindOfClass:[HSQLRow class]], @"Can't persist HSQLRow outside of execution block.");
+            NSAssert(![item conformsToProtocol:@protocol(HSQLValue)], @"Can't persist HSQLValue outside of execution block.");
             [array addObject:item];
         }
     }];
@@ -165,6 +177,58 @@
 - (void)clearBindings
 {
     sqlite3_clear_bindings(_stmt);
+    [_boundObjects removeAllObjects];
+}
+
+@end
+
+@implementation NSNull (HSQLStatement)
+
+- (int)HSQLStatement_bindValueToStmt:(sqlite3_stmt *)stmt column:(int)idx
+{
+    return sqlite3_bind_null(stmt, idx);
+}
+
+@end
+
+@implementation NSString (HSQLStatement)
+
+- (int)HSQLStatement_bindValueToStmt:(sqlite3_stmt *)stmt column:(int)idx
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return sqlite3_bind_text(stmt, idx, [data bytes], [data length], SQLITE_TRANSIENT);
+}
+
+@end
+
+@implementation NSData (HSQLStatement)
+
+- (int)HSQLStatement_bindValueToStmt:(sqlite3_stmt *)stmt column:(int)idx
+{
+    // We claim the data is static and then ensure that HSQLStatement
+    // keeps the object around until the binding is cleared. This is more
+    // memory efficient than copying.
+    return sqlite3_bind_blob(stmt, idx, [self bytes], [self length], SQLITE_STATIC);
+}
+
+@end
+
+@implementation NSNumber (HSQLStatement)
+
+- (int)HSQLStatement_bindValueToStmt:(sqlite3_stmt *)stmt column:(int)idx
+{
+    const char *t = [self objCType];
+    NSAssert(t != NULL, @"NSNumber must have an objcType encoding");
+    switch (*t) {
+        case 'f':
+        case 'd':
+            return sqlite3_bind_double(stmt, idx, [self doubleValue]);
+        case 'q':
+        case 'Q':
+            return sqlite3_bind_int64(stmt, idx, [self longLongValue]);
+        default:
+            return sqlite3_bind_int(stmt, idx, [self intValue]);
+    }
 }
 
 @end

@@ -13,10 +13,11 @@
 
 @interface HSQLStatement : NSObject
 {
-    HSQLSession *_session;
     sqlite3_stmt *_stmt;
     NSDictionary *_columnIndexesByName;
+    NSMutableDictionary *_boundObjects;
 }
+@property (nonatomic, readonly, strong) HSQLSession *session;
 - (void)close;
 - (NSString *)query;
 - (BOOL)isReadOnly;
@@ -26,7 +27,9 @@
 - (int)indexForColumnName:(NSString *)name;
 // Binding Parameters
 - (void)setObject:(id)anObject atIndexedSubscript:(NSUInteger)index;
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)key;
+- (id)objectforKeyedSubscript:(id<NSCopying>)key;
 - (void)executeWithBlock:(void(^)(HSQLRow *row, BOOL *stop))block;
 - (NSArray *)arrayByExecutingWithBlock:(id(^)(HSQLRow *row, BOOL *stop))block;
 - (void)clearBindings;

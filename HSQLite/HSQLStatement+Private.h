@@ -13,4 +13,8 @@
 - (instancetype)initWithSession:(HSQLSession *)session stmt:(sqlite3_stmt *)stmt;
 @end
 
+@interface NSObject (HSQLStatement)
+- (int)HSQLStatement_bindValueToStmt:(sqlite3_stmt *)stmt column:(int)idx;
+@end
+
 #endif
