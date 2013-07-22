@@ -49,10 +49,9 @@
 
 - (NSString *)sequenceFromQuery:(NSString *)query
 {
-    NSMutableArray *letters = [NSMutableArray array];
     HSQLStatement *st = [db statementWithQuery:query error:NULL];
-    [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
-        [letters addObject:[row[@"letter"] stringValue]];
+    NSArray *letters = [st arrayByExecutingWithBlock:^id(HSQLRow *row, BOOL *stop) {
+        return [row[@"letter"] stringValue];
     }];
     return [letters componentsJoinedByString:@" "];
 }

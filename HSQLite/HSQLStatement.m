@@ -150,6 +150,18 @@
     sqlite3_reset(_stmt);
 }
 
+- (NSArray *)arrayByExecutingWithBlock:(id(^)(HSQLRow *row, BOOL *stop))block
+{
+    NSMutableArray *array = [NSMutableArray array];
+    [self executeWithBlock:^(HSQLRow *row, BOOL *stop) {
+        id item = block(row, stop);
+        if (item) {
+            [array addObject:item];
+        }
+    }];
+    return array;
+}
+
 - (void)clearBindings
 {
     sqlite3_clear_bindings(_stmt);

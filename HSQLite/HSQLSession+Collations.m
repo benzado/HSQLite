@@ -52,12 +52,10 @@ void HSQLCollationNeeded(void *ptr, sqlite3 *db, int eTextRep, const char *n)
 
 - (NSArray *)allCollationNames
 {
-    NSMutableArray *names = [NSMutableArray array];
     HSQLStatement *st = [self statementWithQuery:@"PRAGMA collation_list" error:NULL];
-    [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
-        [names addObject:[row[@"name"] stringValue]];
+    return [st arrayByExecutingWithBlock:^id(HSQLRow *row, BOOL *stop) {
+        return [row[@"name"] stringValue];
     }];
-    return names;
 }
 
 - (void)setUndefinedCollationHandler:(HSQLUndefinedCollationHandler)handler
