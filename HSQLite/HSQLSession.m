@@ -15,6 +15,8 @@
 NSString * const HSQLExceptionName = @"HSQLException";
 NSString * const HSQLErrorDomain = @"HSQLError";
 
+NSString * const HSQLUnderlyingExceptionKey = @"HSQLUnderlyingException";
+
 int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
 {
     HSQLSession *db = (__bridge HSQLSession *)ptr;
@@ -279,28 +281,40 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     return (r == SQLITE_OK);
 }
 
-/*
-- (void)transaction:(void(^)())block
+- (void)executeBeginQuery:(NSString *)beginQuery block:(void(^)())block commitQuery:(NSString *)commitQuery rollbackQuery:(NSString *)rollbackQuery
 {
-    NSError *error = nil;
-    if ([self executeQuery:@"BEGIN TRANSACTION" error:&error]) {
-        @try {
-            block();
-            [self executeQuery:@"COMMIT TRANSACTION" error:&error];
+    [self executeQuery:beginQuery error:nil];
+    @try {
+        block();
+        [self executeQuery:commitQuery error:nil];
+    }
+    @catch (NSException *exception) {
+        NSError *error;
+        if ( ! [self executeQuery:rollbackQuery error:&error]) {
+            exception = [NSException
+                         exceptionWithName:HSQLExceptionName
+                         reason:[error localizedDescription]
+                         userInfo:@{HSQLUnderlyingExceptionKey: exception}];
         }
-        @catch (NSException *exception) {
-            if ([self executeQuery:@"ROLLBACK TRANSACTION" error:&error]) {
-                [exception raise];
-            } else {
-                NSException *e = [NSException exceptionWithName:HSQLExceptionName reason:@"ROLLBACK failed" userInfo:
-                                  @{}];
-                [e raise];
-            }
-        }
-    } else {
-        [NSException raise:HSQLExceptionName format:@"BEGIN TRANSACTION failed: %@", error];
+        [exception raise];
     }
 }
- */
+
+- (void)transactionWithBlock:(void(^)())block
+{
+    [self executeBeginQuery:@"BEGIN TRANSACTION"
+                      block:block
+                commitQuery:@"COMMIT TRANSACTION"
+              rollbackQuery:@"ROLLBACK TRANSACTION"];
+}
+
+- (void)savepointWithBlock:(void(^)())block
+{
+    NSString *name = [NSString stringWithFormat:@"\"HS%08x\"", rand()];
+    [self executeBeginQuery:[@"SAVEPOINT " stringByAppendingString:name]
+                      block:block
+                commitQuery:[@"RELEASE " stringByAppendingString:name]
+              rollbackQuery:[@"ROLLBACK TO " stringByAppendingString:name]];
+}
 
 @end

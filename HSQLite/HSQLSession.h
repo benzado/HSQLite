@@ -11,6 +11,8 @@
 extern NSString * const HSQLExceptionName;
 extern NSString * const HSQLErrorDomain;
 
+extern NSString * const HSQLUnderlyingExceptionKey;
+
 @class HSQLSession;
 @class HSQLStatement;
 
@@ -41,6 +43,8 @@ typedef void(^HSQLUndefinedCollationHandler)(HSQLSession *db, NSString *neededCo
 - (void)releaseMemory;
 - (HSQLStatement *)statementWithQuery:(NSString *)sql error:(NSError **)pError;
 - (BOOL)executeQuery:(NSString *)sql error:(NSError **)pError;
+- (void)transactionWithBlock:(void(^)())block;
+- (void)savepointWithBlock:(void(^)())block; // can be nested
 - (sqlite_int64)lastInsertRowID;
 - (int)numberOfRowsChangedByLastStatement;
 - (int)totalNumberOfRowsChanged;
