@@ -21,15 +21,16 @@ typedef NS_ENUM(int, HSQLAutoVacuumMode) {
 @property (nonatomic) NSStringEncoding encoding;
 @property (nonatomic) BOOL foreignKeyConstraintsEnforced;
 @property (nonatomic) int userVersion;
+- (NSArray *)errorsFromIntegrityCheckStoppingAfter:(int)count;
+- (NSArray *)errorsFromIntegrityCheck;
+- (NSArray *)errorsFromQuickCheckStoppingAfter:(int)count;
+- (NSArray *)errorsFromQuickCheck;
 @end
 
 // CONSIDER:
-// integrity_check
-// journal_mode
-// quick_check
 // reverse_unordered_selects
 // schema_version (readonly)
-// secure_delete
+// page_size
 
 // consult http://www.sqlite.org/changes.html for version checks
 // see what Base.app exposes

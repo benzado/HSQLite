@@ -29,6 +29,8 @@
     [self executeQuery:query error:NULL];
 }
 
+@dynamic applicationID;
+
 - (uint32_t)applicationID
 {
     if (sqlite3_libversion_number() < 3007017) {
@@ -49,6 +51,8 @@
     [self didChangeValueForKey:@"applicationID"];
 }
 
+@dynamic autoVacuumMode;
+
 - (HSQLAutoVacuumMode)autoVacuumMode
 {
     return [self intForPragmaQuery:@"PRAGMA auto_vacuum"];
@@ -61,6 +65,8 @@
     [self didChangeValueForKey:@"autoVaccumMode"];
 }
 
+@dynamic autoIndexingEnabled;
+
 - (BOOL)autoIndexingEnabled
 {
     return [self intForPragmaQuery:@"PRAGMA auto_index"];
@@ -72,6 +78,8 @@
     [self setInt:autoIndexingEnabled forPragmaName:@"auto_index"];
     [self didChangeValueForKey:@"autoIndexingEnabled"];
 }
+
+@dynamic encoding;
 
 - (NSStringEncoding)encoding
 {
@@ -104,6 +112,8 @@
     [self executeQuery:query error:NULL];
 }
 
+@dynamic foreignKeyConstraintsEnforced;
+
 - (BOOL)foreignKeyConstraintsEnforced
 {
     return [self intForPragmaQuery:@"PRAGMA foreign_keys"];
@@ -116,6 +126,8 @@
     [self didChangeValueForKey:@"foreignKeyConstraintsEnforced"];
 }
 
+@dynamic userVersion;
+
 - (int)userVersion
 {
     return [self intForPragmaQuery:@"PRAGMA user_version"];
@@ -126,6 +138,39 @@
     [self willChangeValueForKey:@"userVersion"];
     [self setInt:userVersion forPragmaName:@"user_version"];
     [self didChangeValueForKey:@"userVersion"];
+}
+
+- (NSArray *)errorsFromQuery:(NSString *)query
+{
+    return [[self statementWithQuery:query error:nil] arrayByExecutingWithBlock:^id(HSQLRow *row, BOOL *stop) {
+        NSString *message = [row[0] stringValue];
+        if ([message isEqualToString:@"ok"]) return nil;
+        return [NSError errorWithDomain:HSQLErrorDomain
+                                   code:SQLITE_INTERNAL
+                               userInfo:@{NSLocalizedDescriptionKey: message}];
+    }];
+}
+
+- (NSArray *)errorsFromIntegrityCheckStoppingAfter:(int)count
+{
+    return [self errorsFromQuery:
+            [NSString stringWithFormat:@"PRAGMA integrity_check(%d)", count]];
+}
+
+- (NSArray *)errorsFromIntegrityCheck
+{
+    return [self errorsFromQuery:@"PRAGMA integrity_check"];
+}
+
+- (NSArray *)errorsFromQuickCheckStoppingAfter:(int)count
+{
+    return [self errorsFromQuery:
+            [NSString stringWithFormat:@"PRAGMA quick_check(%d)", count]];
+}
+
+- (NSArray *)errorsFromQuickCheck
+{
+    return [self errorsFromQuery:@"PRAGMA quick_check"];
 }
 
 @end
