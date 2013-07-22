@@ -165,17 +165,6 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     [self close];
 }
 
-- (NSString *)absolutePath
-{
-    const char *path = sqlite3_db_filename(_db, "main");
-    return [NSString stringWithUTF8String:path];
-}
-
-- (BOOL)isReadOnly
-{
-    return 1 == sqlite3_db_readonly(_db, "main");
-}
-
 - (void)releaseMemory
 {
     // TODO: automatically call on memory warning

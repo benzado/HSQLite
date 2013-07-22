@@ -11,7 +11,8 @@
 
 @interface HSQLBackupTests : XCTestCase
 {
-    HSQLSession *sourceDatabase;
+    HSQLDatabase *sourceDatabase;
+    NSUInteger rowsToCopy;
 }
 @end
 
@@ -20,12 +21,17 @@
 - (void)setUp
 {
     [super setUp];
-    sourceDatabase = [HSQLSession sessionWithMemoryDatabase];
-    [sourceDatabase executeQuery:@"CREATE TABLE foo ( bar ); INSERT INTO foo VALUES (random());" error:nil];
-    HSQLStatement *stmt = [sourceDatabase statementWithQuery:@"INSERT INTO foo SELECT random() FROM foo" error:nil];
+    HSQLSession *session = [HSQLSession sessionWithTemporaryFile];
+    [session executeQuery:@"CREATE TABLE foo ( bar ); INSERT INTO foo VALUES (random());" error:nil];
+    HSQLStatement *stmt = [session statementWithQuery:@"INSERT INTO foo SELECT random() FROM foo" error:nil];
     for (int i = 0; i < 19; i++) {
         [stmt executeWithBlock:NULL];
     }
+    sourceDatabase = [session mainDatabase];
+    rowsToCopy = [[sourceDatabase tableNamed:@"foo"] numberOfRows];
+    XCTAssertTrue(rowsToCopy > 0);
+    XCTAssertTrue([[sourceDatabase tableNamed:@"foo"] exists]);
+    XCTAssertFalse([[sourceDatabase tableNamed:@"bar"] exists]);
 }
 
 - (void)tearDown
@@ -34,53 +40,58 @@
     [super tearDown];
 }
 
-- (void)testCopy
+- (void)testSameSession
 {
-    HSQLSession *destDatabase = [HSQLSession sessionWithMemoryDatabase];
-    HSQLBackupSession *backup = [sourceDatabase backupSessionWithDestinationDatabase:destDatabase];
-    XCTAssertNotNil(backup);
     NSError *error = nil;
-    BOOL done = [backup copyAllRemainingPagesError:&error];
-    XCTAssertTrue(done);
+    [sourceDatabase.session attachDatabaseFileAtPath:@"" forName:@"grue" error:nil];
     XCTAssertNil(error);
-    XCTAssertEquals(1.0f, backup.progress);
+    HSQLDatabase *destDatabase = [sourceDatabase.session databaseNamed:@"grue"];
+    HSQLBackupOperation *backup = [sourceDatabase backupOperationWithDestinationDatabase:destDatabase error:&error];
+    XCTAssertNil(backup);
+    XCTAssertNotNil(error);
 }
 
-- (void)testPrematureWriteToDestination
+- (void)testSameDatabase
 {
-    HSQLSession *destDatabase = [HSQLSession sessionWithMemoryDatabase];
-    HSQLBackupSession *backup = [sourceDatabase backupSessionWithDestinationDatabase:destDatabase];
-    XCTAssertNotNil(backup);
     NSError *error = nil;
-    BOOL done = [backup copyPagesBatchOfSize:16 error:&error];
-    XCTAssertFalse(done);
-    XCTAssertNil(error);
-    [destDatabase executeQuery:@"INSERT INTO foo VALUES (NULL)" error:&error];
+    HSQLBackupOperation *backup = [sourceDatabase backupOperationWithDestinationDatabase:sourceDatabase error:&error];
+    XCTAssertNil(backup);
     XCTAssertNotNil(error);
+}
+
+- (void)testCopy
+{
+    HSQLDatabase *destDatabase = [[HSQLSession sessionWithTemporaryFile] mainDatabase];
+    HSQLBackupOperation *backup = [sourceDatabase backupOperationWithDestinationDatabase:destDatabase error:nil];
+    XCTAssertNotNil(backup);
+    backup.progressBlock = ^(HSQLBackupOperation *backup) {
+        NSLog(@"Progress: %f%% remaining %d/%d", 100 * backup.progress, backup.remainingNumberOfPages, backup.totalNumberOfPages);
+    };
+    NSError *error = nil;
+    [backup start];
+    XCTAssertTrue([backup isFinished]);
+    XCTAssertNil(error);
+    XCTAssertEquals(1.0f, backup.progress);
+    HSQLTable *destTable = [destDatabase tableNamed:@"foo"];
+    XCTAssertTrue([destTable exists]);
+    XCTAssertEquals(rowsToCopy, [destTable numberOfRows]);
 }
 
 - (void)testCopyOnQueue
 {
-    HSQLSession *destDatabase = [HSQLSession sessionWithMemoryDatabase];
-    HSQLBackupSession *backup = [sourceDatabase backupSessionWithDestinationDatabase:destDatabase];
+    HSQLDatabase *destDatabase = [[HSQLSession sessionWithTemporaryFile] mainDatabase];
+    HSQLBackupOperation *backup = [sourceDatabase backupOperationWithDestinationDatabase:destDatabase error:nil];
     XCTAssertNotNil(backup);
-    dispatch_queue_t q = dispatch_queue_create("test", NULL);
-    __block BOOL isComplete = NO;
-    [backup setProgressNotificationInterval:0.01];
-    [backup copyPagesOnQueue:q progressHandler:^{
+    backup.progressBlock = ^(HSQLBackupOperation *backup) {
         NSLog(@"Progress: %f%% remaining %d/%d", 100 * backup.progress, backup.remainingNumberOfPages, backup.totalNumberOfPages);
-    } completionHandler:^(NSError *error) {
-        isComplete = YES;
-        NSLog(@"Completed with error: %@", error);
-    }];
-    __block BOOL backupIsRunning = YES;
-    while (backupIsRunning) {
-        dispatch_sync(q, ^{
-            NSLog(@"Check");
-            if (isComplete) backupIsRunning = NO;
-        });
-    }
+    };
+    NSOperationQueue *q = [[NSOperationQueue alloc] init];
+    [q addOperation:backup];
+    [q waitUntilAllOperationsAreFinished];
     XCTAssertEquals(1.0f, backup.progress);
+    HSQLTable *destTable = [destDatabase tableNamed:@"foo"];
+    XCTAssertTrue([destTable exists]);
+    XCTAssertEquals(rowsToCopy, [destTable numberOfRows]);
 }
 
 @end

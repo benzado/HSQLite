@@ -38,8 +38,6 @@ typedef void(^HSQLUndefinedCollationHandler)(HSQLSession *db, NSString *neededCo
 + (instancetype)sessionWithFileNamed:(NSString *)name;
 - (instancetype)initWithPath:(NSString *)path flags:(HSQLSessionFlags)flags VFSName:(NSString *)VFSName;
 - (void)close;
-- (NSString *)absolutePath;
-- (BOOL)isReadOnly;
 - (void)releaseMemory;
 - (HSQLStatement *)statementWithQuery:(NSString *)sql error:(NSError **)pError;
 - (BOOL)executeQuery:(NSString *)sql error:(NSError **)pError;

@@ -10,8 +10,10 @@
 #import <HSQLite/HSQLStatement.h>
 #import <HSQLite/HSQLRow.h>
 #import <HSQLite/HSQLValue.h>
+#import <HSQLite/HSQLDatabase.h>
+#import <HSQLite/HSQLTable.h>
 #import <HSQLite/HSQLSession+Pragmas.h>
 #import <HSQLite/HSQLSession+Collations.h>
 #import <HSQLite/HSQLSession+Functions.h>
 #import <HSQLite/HSQLFunctionContext.h>
-#import <HSQLite/HSQLBackupSession.h>
+#import <HSQLite/HSQLBackupOperation.h>

@@ -17,18 +17,18 @@
 
 - (void)testMemoryDatabase
 {
-    HSQLSession *db = [HSQLSession sessionWithMemoryDatabase];
-    XCTAssertFalse([db isReadOnly]);
-    XCTAssertEqualObjects(@"", [db absolutePath]);
-    [db close];
+    HSQLSession *session = [HSQLSession sessionWithMemoryDatabase];
+    XCTAssertFalse([[session mainDatabase] isReadOnly]);
+    XCTAssertEqualObjects(@"", [[session mainDatabase] absolutePath]);
+    [session close];
 }
 
 - (void)testTemporaryDatabase
 {
-    HSQLSession *db = [HSQLSession sessionWithMemoryDatabase];
-    XCTAssertFalse([db isReadOnly]);
-    XCTAssertEqualObjects(@"", [db absolutePath]);
-    [db close];
+    HSQLSession *session = [HSQLSession sessionWithTemporaryFile];
+    XCTAssertFalse([[session mainDatabase] isReadOnly]);
+    XCTAssertEqualObjects(@"", [[session mainDatabase] absolutePath]);
+    [session close];
 }
 
 - (void)testNilQuery
@@ -76,17 +76,17 @@
     XCTAssertNil(error);
 }
 
+#if SQLITE_VERSION_NUMBER >= 3007017
+
 - (void)testAppID
 {
     HSQLSession *db = [HSQLSession sessionWithMemoryDatabase];
     XCTAssertEquals(0u, db.applicationID);
     db.applicationID = 'hsft';
-#if SQLITE_VERSION_NUMBER < 3007017
-    XCTAssertEquals(0u, db.applicationID);
-#else
     XCTAssertEquals((uint32_t)'hsft', db.applicationID);
-#endif
 }
+
+#endif
 
 - (void)testUserVersion
 {
