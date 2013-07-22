@@ -1,0 +1,6 @@
+# Mac OS X
+.DS_Store
+
+# Xcode 4
+xcuserdata
+*.xccheckout
