@@ -71,10 +71,10 @@
     [backup start];
     XCTAssertTrue([backup isFinished]);
     XCTAssertNil(error);
-    XCTAssertEquals(1.0f, backup.progress);
+    XCTAssertEqual(1.0f, backup.progress);
     HSQLTable *destTable = [destDatabase tableNamed:@"foo"];
     XCTAssertTrue([destTable exists]);
-    XCTAssertEquals(rowsToCopy, [destTable numberOfRows]);
+    XCTAssertEqual(rowsToCopy, [destTable numberOfRows]);
 }
 
 - (void)testCopyOnQueue
@@ -88,10 +88,10 @@
     NSOperationQueue *q = [[NSOperationQueue alloc] init];
     [q addOperation:backup];
     [q waitUntilAllOperationsAreFinished];
-    XCTAssertEquals(1.0f, backup.progress);
+    XCTAssertEqual(1.0f, backup.progress);
     HSQLTable *destTable = [destDatabase tableNamed:@"foo"];
     XCTAssertTrue([destTable exists]);
-    XCTAssertEquals(rowsToCopy, [destTable numberOfRows]);
+    XCTAssertEqual(rowsToCopy, [destTable numberOfRows]);
 }
 
 @end

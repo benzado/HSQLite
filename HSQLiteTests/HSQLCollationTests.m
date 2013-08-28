@@ -44,7 +44,7 @@
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         count = [row[0] intValue];
     }];
-    XCTAssertEquals(17, count);
+    XCTAssertEqual(17, count);
 }
 
 - (NSString *)sequenceFromQuery:(NSString *)query

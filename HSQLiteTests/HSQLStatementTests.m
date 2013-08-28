@@ -33,14 +33,14 @@
 {
     HSQLStatement *st = [db statementWithQuery:@"SELECT NULL" error:NULL];
     XCTAssertNotNil(st);
-    XCTAssertEquals(0, [st numberOfParameters]);
-    XCTAssertEquals(1, [st numberOfColumns]);
+    XCTAssertEqual(0, [st numberOfParameters]);
+    XCTAssertEqual(1, [st numberOfColumns]);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         id <HSQLValue> value = row[0];
         XCTAssertNotNil(value);
         XCTAssertTrue([value isNull]);
-        XCTAssertEquals(HSQLValueTypeNull, [value type]);
-        XCTAssertEquals(0, [value intValue]);
+        XCTAssertEqual(HSQLValueTypeNull, [value type]);
+        XCTAssertEqual(0, [value intValue]);
     }];
 }
 
@@ -48,14 +48,14 @@
 {
     HSQLStatement *st = [db statementWithQuery:@"SELECT 42" error:NULL];
     XCTAssertNotNil(st);
-    XCTAssertEquals(0, [st numberOfParameters]);
-    XCTAssertEquals(1, [st numberOfColumns]);
+    XCTAssertEqual(0, [st numberOfParameters]);
+    XCTAssertEqual(1, [st numberOfColumns]);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         id <HSQLValue> value = row[0];
         XCTAssertNotNil(value);
         XCTAssertFalse([value isNull]);
-        XCTAssertEquals(HSQLValueTypeInteger, [value type]);
-        XCTAssertEquals(42, [value intValue]);
+        XCTAssertEqual(HSQLValueTypeInteger, [value type]);
+        XCTAssertEqual(42, [value intValue]);
     }];
 }
 
@@ -63,18 +63,18 @@
 {
     HSQLStatement *st = [db statementWithQuery:@"SELECT \"Hello\", \"World\"" error:NULL];
     XCTAssertNotNil(st);
-    XCTAssertEquals(0, [st numberOfParameters]);
-    XCTAssertEquals(2, [st numberOfColumns]);
+    XCTAssertEqual(0, [st numberOfParameters]);
+    XCTAssertEqual(2, [st numberOfColumns]);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         id <HSQLValue> value1 = row[0];
         XCTAssertNotNil(value1);
         XCTAssertFalse([value1 isNull]);
-        XCTAssertEquals(HSQLValueTypeText, [value1 type]);
+        XCTAssertEqual(HSQLValueTypeText, [value1 type]);
         XCTAssertEqualObjects(@"Hello", [value1 stringValue]);
         id <HSQLValue> value2 = row[1];
         XCTAssertNotNil(value2);
         XCTAssertFalse([value2 isNull]);
-        XCTAssertEquals(HSQLValueTypeText, [value2 type]);
+        XCTAssertEqual(HSQLValueTypeText, [value2 type]);
         XCTAssertEqualObjects(@"World", [value2 stringValue]);
     }];
 }
@@ -83,19 +83,19 @@
 {
     HSQLStatement *st = [db statementWithQuery:@"SELECT 3.141592653589793 AS `π`" error:NULL];
     XCTAssertNotNil(st);
-    XCTAssertEquals(0, [st numberOfParameters]);
-    XCTAssertEquals(1, [st numberOfColumns]);
+    XCTAssertEqual(0, [st numberOfParameters]);
+    XCTAssertEqual(1, [st numberOfColumns]);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         id <HSQLValue> value = row[0];
         XCTAssertNotNil(value);
         XCTAssertFalse([value isNull]);
-        XCTAssertEquals(HSQLValueTypeFloat, [value type]);
-        XCTAssertEqualsWithAccuracy(3.141592653589793, [value doubleValue], 1e-15);
+        XCTAssertEqual(HSQLValueTypeFloat, [value type]);
+        XCTAssertEqualWithAccuracy(3.141592653589793, [value doubleValue], 1e-15);
         value = row[@"π"];
         XCTAssertNotNil(value);
         XCTAssertFalse([value isNull]);
-        XCTAssertEquals(HSQLValueTypeFloat, [value type]);
-        XCTAssertEqualsWithAccuracy(3.141592653589793, [value doubleValue], 1e-15);
+        XCTAssertEqual(HSQLValueTypeFloat, [value type]);
+        XCTAssertEqualWithAccuracy(3.141592653589793, [value doubleValue], 1e-15);
     }];
 }
 
@@ -105,8 +105,8 @@
 
     HSQLStatement *st = [db statementWithQuery:@"SELECT 1 AS `A`, 2 AS `B`" error:NULL];
     XCTAssertNotNil(st);
-    XCTAssertEquals(0, [st numberOfParameters]);
-    XCTAssertEquals(2, [st numberOfColumns]);
+    XCTAssertEqual(0, [st numberOfParameters]);
+    XCTAssertEqual(2, [st numberOfColumns]);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         XCTAssertNotNil(row[@"A"]);
         XCTAssertNotNil(row[@"B"]);

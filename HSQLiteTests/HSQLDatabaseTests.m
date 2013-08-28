@@ -31,11 +31,11 @@
 
 - (void)testListDatabases
 {
-    XCTAssertEquals((NSUInteger)1, [[session allDatabases] count]);
+    XCTAssertEqual((NSUInteger)1, [[session allDatabases] count]);
     [session executeQuery:@"CREATE TEMPORARY TABLE foo (bar)" error:nil];
-    XCTAssertEquals((NSUInteger)2, [[session allDatabases] count]);
+    XCTAssertEqual((NSUInteger)2, [[session allDatabases] count]);
     [session attachDatabaseFileAtPath:@":memory:" forName:@"grue" error:nil];
-    XCTAssertEquals((NSUInteger)3, [[session allDatabases] count]);
+    XCTAssertEqual((NSUInteger)3, [[session allDatabases] count]);
 }
 
 - (void)testReadOnly

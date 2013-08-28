@@ -54,7 +54,7 @@
 {
     HSQLBlob *blob = [table blobForRow:1 inColumnNamed:@"blob"];
     XCTAssertNotNil(blob);
-    XCTAssertEquals(origData.length, blob.length);
+    XCTAssertEqual(origData.length, blob.length);
     NSData *blobData = [blob dataWithRange:NSMakeRange(0, blob.length)];
     XCTAssertEqualObjects(blobData, origData);
 }
@@ -63,7 +63,7 @@
 {
     HSQLBlob *blob = [table blobForRow:1 inColumnNamed:@"blob"];
     XCTAssertNotNil(blob);
-    XCTAssertEquals(origData.length, blob.length);
+    XCTAssertEqual(origData.length, blob.length);
     NSMutableData *buffer = [NSMutableData dataWithCapacity:origData.length];
     while (![blob isAtEnd]) {
         NSData *chunk = [blob readDataOfLength:20];
@@ -76,14 +76,14 @@
 {
     HSQLMutableBlob *blob = [table mutableBlobForRow:1 inColumnNamed:@"blob"];
     XCTAssertNotNil(blob);
-    XCTAssertEquals(origData.length, blob.length);
+    XCTAssertEqual(origData.length, blob.length);
     [blob replaceBytesAtOffset:0 withData:moreData];
     [blob close];
     HSQLStatement *st = [table.database.session statementWithQuery:@"SELECT blob FROM test WHERE rowid = 1" error:nil];
     NSArray *array = [st arrayByExecutingWithBlock:^id(HSQLRow *row, BOOL *stop) {
         return [row[0] dataValue];
     }];
-    XCTAssertEquals(1u, [array count]);
+    XCTAssertEqual(1u, [array count]);
     XCTAssertEqualObjects(array[0], moreData);
 }
 
@@ -91,7 +91,7 @@
 {
     HSQLMutableBlob *blob = [table mutableBlobForRow:1 inColumnNamed:@"blob"];
     XCTAssertNotNil(blob);
-    XCTAssertEquals(origData.length, blob.length);
+    XCTAssertEqual(origData.length, blob.length);
     NSRange r = NSMakeRange(0, 16);
     for (r.location = 0; r.location < moreData.length; r.location += 16) {
         NSData *chunk = [moreData subdataWithRange:r];
@@ -103,7 +103,7 @@
     NSArray *array = [st arrayByExecutingWithBlock:^id(HSQLRow *row, BOOL *stop) {
         return [row[0] dataValue];
     }];
-    XCTAssertEquals(1u, [array count]);
+    XCTAssertEqual(1u, [array count]);
     XCTAssertEqualObjects(array[0], moreData);
 }
 

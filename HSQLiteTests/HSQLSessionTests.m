@@ -81,9 +81,9 @@
 - (void)testAppID
 {
     HSQLSession *db = [HSQLSession sessionWithMemoryDatabase];
-    XCTAssertEquals(0u, db.applicationID);
+    XCTAssertEqual(0u, db.applicationID);
     db.applicationID = 'hsft';
-    XCTAssertEquals((uint32_t)'hsft', db.applicationID);
+    XCTAssertEqual((uint32_t)'hsft', db.applicationID);
 }
 
 #endif
@@ -91,11 +91,11 @@
 - (void)testUserVersion
 {
     HSQLSession *db = [HSQLSession sessionWithMemoryDatabase];
-    XCTAssertEquals(0, db.userVersion);
+    XCTAssertEqual(0, db.userVersion);
     db.userVersion = 42;
-    XCTAssertEquals(42, db.userVersion);
+    XCTAssertEqual(42, db.userVersion);
     db.userVersion = -47;
-    XCTAssertEquals(-47, db.userVersion);
+    XCTAssertEqual(-47, db.userVersion);
 }
 
 @end

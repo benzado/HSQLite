@@ -38,8 +38,8 @@
     HSQLStatement *st = [db statementWithQuery:@"SELECT FOO()" error:&error];
     XCTAssertNotNil(st);
     XCTAssertNil(error);
-    XCTAssertEquals(1, [st numberOfColumns]);
-    XCTAssertEquals(0, [st numberOfParameters]);
+    XCTAssertEqual(1, [st numberOfColumns]);
+    XCTAssertEqual(0, [st numberOfParameters]);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         XCTAssertEqualObjects(@"BAR", [row[0] stringValue]);
     }];
@@ -59,12 +59,12 @@
     HSQLStatement *st = [db statementWithQuery:@"SELECT (SIN($u) * SIN($u)) + (COS(:v) * COS(:v))" error:&error];
     XCTAssertNotNil(st);
     XCTAssertNil(error);
-    XCTAssertEquals(1, [st numberOfColumns]);
-    XCTAssertEquals(2, [st numberOfParameters]);
+    XCTAssertEqual(1, [st numberOfColumns]);
+    XCTAssertEqual(2, [st numberOfParameters]);
     st[@"$u"] = @(M_PI_2);
     st[@":v"] = @(M_PI_2);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
-        XCTAssertEquals(1.0, [row[0] doubleValue]);
+        XCTAssertEqual(1.0, [row[0] doubleValue]);
     }];
 }
 
@@ -87,14 +87,14 @@
     }];
     HSQLStatement *st = [db statementWithQuery:@"SELECT SIN(0)" error:NULL];
     [st executeWithBlock:NULL];
-    XCTAssertEquals(0, cacheHitCount);
-    XCTAssertEquals(1, cacheMissCount);
+    XCTAssertEqual(0, cacheHitCount);
+    XCTAssertEqual(1, cacheMissCount);
     [st executeWithBlock:NULL];
-    XCTAssertEquals(1, cacheHitCount);
-    XCTAssertEquals(1, cacheMissCount);
+    XCTAssertEqual(1, cacheHitCount);
+    XCTAssertEqual(1, cacheMissCount);
     [st executeWithBlock:NULL];
-    XCTAssertEquals(2, cacheHitCount);
-    XCTAssertEquals(1, cacheMissCount);
+    XCTAssertEqual(2, cacheHitCount);
+    XCTAssertEqual(1, cacheMissCount);
 }
 
 - (void)testAggregateFunction
@@ -152,26 +152,26 @@
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         median = [row[0] doubleValue];
     }];
-    XCTAssertEquals(5.5, median);
+    XCTAssertEqual(5.5, median);
     
     st[1] = @(5);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         median = [row[0] doubleValue];
     }];
-    XCTAssertEquals(3.0, median);
+    XCTAssertEqual(3.0, median);
     
     st[1] = @(2);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         median = [row[0] doubleValue];
     }];
-    XCTAssertEquals(1.5, median);
+    XCTAssertEqual(1.5, median);
 
     st[1] = @(0);
     [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
         XCTAssertTrue([row[0] isNull]);
         median = [row[0] doubleValue];
     }];
-    XCTAssertEquals(0.0, median);
+    XCTAssertEqual(0.0, median);
 }
 
 @end
