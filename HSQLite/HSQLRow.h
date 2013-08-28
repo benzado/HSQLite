@@ -12,10 +12,6 @@
 @protocol HSQLValue;
 
 @interface HSQLRow : NSObject
-{
-    HSQLStatement *_statement;
-    sqlite3_stmt *_stmt;
-}
 - (id <HSQLValue>)objectAtIndexedSubscript:(NSUInteger)idx;
 - (id <HSQLValue>)objectForKeyedSubscript:(NSString *)key;
 @end

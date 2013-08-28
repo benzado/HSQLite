@@ -142,12 +142,15 @@
 {
     int r;
     BOOL done = NO;
-    HSQLRow *row = [[HSQLRow alloc] initWithStatement:self stmt:_stmt];
     while ( ! done) {
         r = sqlite3_step(_stmt);
         switch (r) {
             case SQLITE_ROW:
-                if (block) block(row, &done);
+                if (block) {
+                    HSQLRow *row = [[HSQLRow alloc] initWithStatement:self stmt:_stmt];
+                    block(row, &done);
+                    [row invalidate];
+                }
                 break;
             case SQLITE_DONE:
                 done = YES;

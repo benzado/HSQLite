@@ -11,6 +11,10 @@
 
 @interface HSQLRow (Private)
 - (instancetype)initWithStatement:(HSQLStatement *)statement stmt:(sqlite3_stmt *)stmt;
+- (void)invalidate;
+@end
+
+@interface HSQLInvalidRow : HSQLRow
 @end
 
 #endif

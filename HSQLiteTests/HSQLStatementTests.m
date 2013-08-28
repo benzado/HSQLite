@@ -119,4 +119,30 @@
     }];
 }
 
+- (void)testCaptureRow
+{
+    HSQLStatement *st = [db statementWithQuery:@"SELECT 42 AS `answer`" error:NULL];
+    XCTAssertNotNil(st);
+    XCTAssertEqual(0, [st numberOfParameters]);
+    XCTAssertEqual(1, [st numberOfColumns]);
+    __block HSQLRow *savedRow;
+    __block id <HSQLValue> savedValue;
+    [st executeWithBlock:^(HSQLRow *row, BOOL *stop) {
+        savedRow = row;
+        savedValue = row[0];
+        XCTAssertEqual(42, [savedRow[0] intValue]);
+        XCTAssertEqual(42, [savedRow[@"answer"] intValue]);
+        XCTAssertEqual(42, [savedValue intValue]);
+    }];
+    XCTAssertThrows(savedRow[0]);
+    XCTAssertThrows(savedRow[@"answer"]);
+    XCTAssertThrows([savedValue type]);
+    XCTAssertThrows([savedValue isNull]);
+    XCTAssertThrows([savedValue dataValue]);
+    XCTAssertThrows([savedValue doubleValue]);
+    XCTAssertThrows([savedValue intValue]);
+    XCTAssertThrows([savedValue int64Value]);
+    XCTAssertThrows([savedValue stringValue]);
+}
+
 @end
