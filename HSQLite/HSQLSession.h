@@ -23,8 +23,8 @@ typedef NS_OPTIONS(int, HSQLSessionFlags) {
 };
 
 typedef BOOL(^HSQLBusyHandler)(HSQLSession *db, int numberOfLockAttempts);
-
 typedef void(^HSQLUndefinedCollationHandler)(HSQLSession *db, NSString *neededCollationName);
+typedef void(^HSQLTransactionBlock)(BOOL *rollback);
 
 @interface HSQLSession : NSObject
 {
@@ -41,8 +41,8 @@ typedef void(^HSQLUndefinedCollationHandler)(HSQLSession *db, NSString *neededCo
 - (void)releaseMemory;
 - (HSQLStatement *)statementWithQuery:(NSString *)sql error:(NSError **)pError;
 - (BOOL)executeQuery:(NSString *)sql error:(NSError **)pError;
-- (void)transactionWithBlock:(void(^)())block;
-- (void)savepointWithBlock:(void(^)())block; // can be nested
+- (void)transactionWithBlock:(HSQLTransactionBlock)block;
+- (void)savepointWithBlock:(HSQLTransactionBlock)block; // can be nested
 - (sqlite_int64)lastInsertRowID;
 - (int)numberOfRowsChangedByLastStatement;
 - (int)totalNumberOfRowsChanged;

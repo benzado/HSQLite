@@ -275,26 +275,26 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
     return (r == SQLITE_OK);
 }
 
-- (void)executeBeginQuery:(NSString *)beginQuery block:(void(^)())block commitQuery:(NSString *)commitQuery rollbackQuery:(NSString *)rollbackQuery
+- (void)executeBeginQuery:(NSString *)beginQuery block:(HSQLTransactionBlock)block commitQuery:(NSString *)commitQuery rollbackQuery:(NSString *)rollbackQuery
 {
+    BOOL rollback = NO;
     [self executeQuery:beginQuery error:nil];
     @try {
-        block();
-        [self executeQuery:commitQuery error:nil];
+        block(&rollback);
     }
     @catch (NSException *exception) {
-        NSError *error;
-        if ( ! [self executeQuery:rollbackQuery error:&error]) {
-            exception = [NSException
-                         exceptionWithName:HSQLExceptionName
-                         reason:[error localizedDescription]
-                         userInfo:@{HSQLUnderlyingExceptionKey: exception}];
+        rollback = YES;
+    }
+    @finally {
+        if (rollback) {
+            [self executeQuery:rollbackQuery error:NULL];
+        } else {
+            [self executeQuery:commitQuery error:NULL];
         }
-        [exception raise];
     }
 }
 
-- (void)transactionWithBlock:(void(^)())block
+- (void)transactionWithBlock:(HSQLTransactionBlock)block
 {
     [self executeBeginQuery:@"BEGIN TRANSACTION"
                       block:block
@@ -302,7 +302,7 @@ int HSQLDatabaseBusyHandler(void *ptr, int lockAttempts)
               rollbackQuery:@"ROLLBACK TRANSACTION"];
 }
 
-- (void)savepointWithBlock:(void(^)())block
+- (void)savepointWithBlock:(HSQLTransactionBlock)block
 {
     NSString *name = [NSString stringWithFormat:@"\"HS%08x\"", rand()];
     [self executeBeginQuery:[@"SAVEPOINT " stringByAppendingString:name]
