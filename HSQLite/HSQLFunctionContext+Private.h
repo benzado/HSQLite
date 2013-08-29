@@ -10,11 +10,9 @@
 #define HSQLite_HSQLFunctionContext_Private_h
 
 @interface HSQLFunctionContext (Private)
-- (instancetype)initWithContext:(sqlite3_context *)context;
-@end
-
-@interface HSQLAggregateFunctionContext (Private)
-- (void)releaseAggregateContextObject;
+- (instancetype)initWithContext:(sqlite3_context *)context arguments:(sqlite3_value **)argv count:(int)argc;
+- (void)invalidate;
+- (BOOL)didReturn;
 @end
 
 #endif

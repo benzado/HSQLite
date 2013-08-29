@@ -6,7 +6,10 @@
 //  Copyright (c) 2013 Heroic Software. All rights reserved.
 //
 
+#import <objc/runtime.h>
+
 #import "HSQLParameterValue.h"
+#import "HSQLExpiredValue.h"
 
 @implementation HSQLParameterValue
 
@@ -16,6 +19,11 @@
         _value = value;
     }
     return self;
+}
+
+- (void)invalidate
+{
+    object_setClass(self, [HSQLExpiredValue class]);
 }
 
 - (HSQLValueType)type

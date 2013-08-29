@@ -17,6 +17,3 @@
 }
 - (instancetype)initWithColumnIndex:(int)idx stmt:(sqlite3_stmt *)stmt;
 @end
-
-@interface HSQLInvalidColumnValue : HSQLColumnValue
-@end

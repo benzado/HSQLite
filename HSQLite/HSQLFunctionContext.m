@@ -7,6 +7,8 @@
 //
 
 #import "HSQLFunctionContext.h"
+#import "HSQLFunctionContext+Private.h"
+#import "HSQLParameterValue.h"
 
 void HSQLFunctionContextDestroyAuxiliaryObject(void *ptr)
 {
@@ -14,69 +16,57 @@ void HSQLFunctionContextDestroyAuxiliaryObject(void *ptr)
 }
 
 @implementation HSQLFunctionContext
+{
+    sqlite3_context *_context;
+    NSArray *_arguments;
+    BOOL _didReturn;
+}
 
-- (instancetype)initWithContext:(sqlite3_context *)context
+- (instancetype)initWithContext:(sqlite3_context *)context arguments:(sqlite3_value **)argv count:(int)argc
 {
     if ((self = [super init])) {
         _context = context;
+        NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:argc];
+        for (int i = 0; i < argc; i++) {
+            HSQLParameterValue *value = [[HSQLParameterValue alloc] initWithValue:argv[i]];
+            [arguments addObject:value];
+        }
+        _arguments = arguments;
     }
     return self;
 }
 
-- (void)returnData:(NSData *)result
+- (void)invalidate
 {
-    sqlite3_result_blob(_context, [result bytes], [result length], SQLITE_TRANSIENT);
+    [_arguments makeObjectsPerformSelector:@selector(invalidate)];
+    _context = NULL;
+    _arguments = nil;
 }
 
-- (void)returnDouble:(double)result
+- (BOOL)didReturn
 {
-    sqlite3_result_double(_context, result);
+    return _didReturn;
 }
 
-- (void)returnInt:(int)result
+- (int)argumentCount
 {
-    sqlite3_result_int(_context, result);
+    if (_context == NULL) {
+        [NSException raise:NSInternalInconsistencyException format:@"Illegal attempt to access HSQLFunctionContext outside of function scope."];
+    }
+    return [_arguments count];
 }
 
-- (void)returnInt64:(sqlite3_int64)result
+- (id <HSQLValue>)argumentValueAtIndex:(int)idx
 {
-    sqlite3_result_int64(_context, result);
+    if (_context == NULL) {
+        [NSException raise:NSInternalInconsistencyException format:@"Illegal attempt to access HSQLFunctionContext outside of function scope."];
+    }
+    return _arguments[idx];
 }
 
-- (void)returnNull
+- (id <HSQLValue>)objectAtIndexedSubscript:(NSUInteger)idx
 {
-    sqlite3_result_null(_context);
-}
-
-- (void)returnString:(NSString *)result
-{
-    sqlite3_result_text(_context, [result UTF8String], -1, SQLITE_TRANSIENT);
-}
-
-- (void)returnValue:(id <HSQLValue>)result
-{
-    [NSException raise:NSInternalInconsistencyException format:@"Not yet implemented"];
-    sqlite3_result_value(_context, NULL);
-}
-
-- (void)returnErrorMessage:(NSString *)message
-{
-    sqlite3_result_error(_context, [message UTF8String], -1);
-}
-
-- (void)returnErrorTooBig
-{
-    sqlite3_result_error_toobig(_context);
-}
-
-- (void)returnErrorNoMemory
-{
-    sqlite3_result_error_nomem(_context);
-}
-
-- (void)returnErrorCode:(int)code
-{
-    sqlite3_result_error_code(_context, code);
+    return [self argumentValueAtIndex:idx];
 }
 
 - (id)auxiliaryObjectForArgumentAtIndex:(int)idx
@@ -90,53 +80,71 @@ void HSQLFunctionContextDestroyAuxiliaryObject(void *ptr)
     sqlite3_set_auxdata(_context, idx, ptr, &HSQLFunctionContextDestroyAuxiliaryObject);
 }
 
-@end
-
-@implementation HSQLAggregateFunctionContext
-
-- (id)aggregateContextObjectIfPresent
+- (void)returnData:(NSData *)result
 {
-    const void **ptr = sqlite3_aggregate_context(_context, 0);
-    if (ptr) {
-        return (__bridge id)(ptr[1]);
-    } else {
-        return nil;
-    }
+    sqlite3_result_blob(_context, [result bytes], [result length], SQLITE_TRANSIENT);
+    _didReturn = YES;
 }
 
-- (id)aggregateContextObject
+- (void)returnDouble:(double)result
 {
-    const void **ptr = sqlite3_aggregate_context(_context, 2 * sizeof(void *));
-    return (__bridge id)(ptr[1]);
+    sqlite3_result_double(_context, result);
+    _didReturn = YES;
 }
 
-- (void)setAggregateContextObject:(id)object
+- (void)returnInt:(int)result
 {
-    const void **ptr = sqlite3_aggregate_context(_context, 2 * sizeof(void *));
-    if (ptr[0] == _context && ptr[1] != NULL) {
-        CFRelease(ptr[1]);
-    }
-    ptr[0] = _context;
-    ptr[1] = CFBridgingRetain(object);
+    sqlite3_result_int(_context, result);
+    _didReturn = YES;
 }
 
-- (void)releaseAggregateContextObject
+- (void)returnInt64:(sqlite3_int64)result
 {
-    const void **ptr = sqlite3_aggregate_context(_context, 0);
-    if (ptr && ptr[0] == _context && ptr[1] != NULL) {
-        CFRelease(ptr[1]);
-        ptr[1] = NULL;
-    }
+    sqlite3_result_int64(_context, result);
+    _didReturn = YES;
 }
 
-- (void *)aggregateContextBytesIfPresent
+- (void)returnNull
 {
-    return sqlite3_aggregate_context(_context, 0);
+    sqlite3_result_null(_context);
+    _didReturn = YES;
 }
 
-- (void *)aggregateContextBytesOfLength:(NSUInteger)length
+- (void)returnString:(NSString *)result
 {
-    return sqlite3_aggregate_context(_context, length);
+    sqlite3_result_text(_context, [result UTF8String], -1, SQLITE_TRANSIENT);
+    _didReturn = YES;
+}
+
+- (void)returnValue:(id <HSQLValue>)result
+{
+    [NSException raise:NSInternalInconsistencyException format:@"Not yet implemented"];
+    // sqlite3_result_value(_context, ?);
+    _didReturn = YES;
+}
+
+- (void)returnErrorMessage:(NSString *)message
+{
+    sqlite3_result_error(_context, [message UTF8String], -1);
+    _didReturn = YES;
+}
+
+- (void)returnErrorTooBig
+{
+    sqlite3_result_error_toobig(_context);
+    _didReturn = YES;
+}
+
+- (void)returnErrorNoMemory
+{
+    sqlite3_result_error_nomem(_context);
+    _didReturn = YES;
+}
+
+- (void)returnErrorCode:(int)code
+{
+    sqlite3_result_error_code(_context, code);
+    _didReturn = YES;
 }
 
 @end

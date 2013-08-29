@@ -11,9 +11,14 @@
 @protocol HSQLValue;
 
 @interface HSQLFunctionContext : NSObject
-{
-    sqlite3_context *_context;
-}
+// fetching arguments
+- (int)argumentCount;
+- (id <HSQLValue>)argumentValueAtIndex:(int)idx;
+- (id <HSQLValue>)objectAtIndexedSubscript:(NSUInteger)idx;
+// for caching values related to argument values
+- (id)auxiliaryObjectForArgumentAtIndex:(int)idx;
+- (void)setAuxiliaryObject:(id)object forArgumentAtIndex:(int)idx;
+// returning values
 - (void)returnData:(NSData *)result;
 - (void)returnDouble:(double)result;
 - (void)returnInt:(int)result;
@@ -25,15 +30,4 @@
 - (void)returnErrorTooBig;
 - (void)returnErrorNoMemory;
 - (void)returnErrorCode:(int)code;
-// for caching responses
-- (id)auxiliaryObjectForArgumentAtIndex:(int)idx;
-- (void)setAuxiliaryObject:(id)object forArgumentAtIndex:(int)idx;
-@end
-
-@interface HSQLAggregateFunctionContext : HSQLFunctionContext
-- (id)aggregateContextObjectIfPresent;
-- (id)aggregateContextObject;
-- (void)setAggregateContextObject:(id)object;
-- (void *)aggregateContextBytesIfPresent;
-- (void *)aggregateContextBytesOfLength:(NSUInteger)length;
 @end
