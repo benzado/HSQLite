@@ -86,13 +86,13 @@
         }
     }];
     HSQLStatement *st = [db statementWithQuery:@"SELECT SIN(0)" error:NULL];
-    [st executeWithBlock:NULL];
+    [st execute];
     XCTAssertEqual(0, cacheHitCount);
     XCTAssertEqual(1, cacheMissCount);
-    [st executeWithBlock:NULL];
+    [st execute];
     XCTAssertEqual(1, cacheHitCount);
     XCTAssertEqual(1, cacheMissCount);
-    [st executeWithBlock:NULL];
+    [st execute];
     XCTAssertEqual(2, cacheHitCount);
     XCTAssertEqual(1, cacheMissCount);
 }
@@ -103,7 +103,7 @@
         // do nothing
     }];
     HSQLStatement *st = [db statementWithQuery:@"SELECT VAGUE()" error:NULL];
-    XCTAssertThrows([st executeWithBlock:NULL]);
+    XCTAssertThrows([st execute]);
 }
 
 - (void)testValueEscape
@@ -117,7 +117,7 @@
         [context returnNull];
     }];
     HSQLStatement *st = [db statementWithQuery:@"SELECT WHAT(99)" error:NULL];
-    [st executeWithBlock:NULL];
+    [st execute];
     XCTAssertNotNil(savedContext);
     XCTAssertThrows(savedContext[0]);
     XCTAssertNotNil(savedValue);

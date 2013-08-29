@@ -31,6 +31,7 @@
 - (void)setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)key;
 - (id)objectforKeyedSubscript:(id<NSCopying>)key;
 - (void)executeWithBlock:(void(^)(HSQLRow *row, BOOL *stop))block;
+- (void)execute;
 - (NSArray *)arrayByExecutingWithBlock:(id(^)(HSQLRow *row, BOOL *stop))block;
 - (void)clearBindings;
 @end

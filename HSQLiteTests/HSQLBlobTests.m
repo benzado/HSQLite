@@ -33,7 +33,7 @@
 
     HSQLStatement *st = [session statementWithQuery:@"INSERT INTO test VALUES (?)" error:nil];
     st[1] = origData;
-    [st executeWithBlock:NULL];
+    [st execute];
     
     table = [[session mainDatabase] tableNamed:@"test"];
 }
@@ -114,7 +114,7 @@
     st[1] = [HSQLDeferredBlob deferredBlobOfLength:[moreData length] withBlock:^(HSQLMutableBlob *blob) {
         [blob setData:moreData];
     }];
-    [st executeWithBlock:NULL];
+    [st execute];
 
     HSQLBlob *blob = [table blobForRow:[table.database.session lastInsertRowID] inColumnNamed:@"blob"];
     NSData *data = [blob dataWithRange:NSMakeRange(0, blob.length)];

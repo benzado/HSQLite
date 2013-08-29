@@ -25,7 +25,7 @@
     [session executeQuery:@"CREATE TABLE foo ( bar ); INSERT INTO foo VALUES (random());" error:nil];
     HSQLStatement *stmt = [session statementWithQuery:@"INSERT INTO foo SELECT random() FROM foo" error:nil];
     for (int i = 0; i < 19; i++) {
-        [stmt executeWithBlock:NULL];
+        [stmt execute];
     }
     sourceDatabase = [session mainDatabase];
     rowsToCopy = [[sourceDatabase tableNamed:@"foo"] numberOfRows];

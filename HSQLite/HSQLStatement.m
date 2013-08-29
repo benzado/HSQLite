@@ -163,6 +163,11 @@
     sqlite3_reset(_stmt);
 }
 
+- (void)execute
+{
+    [self executeWithBlock:NULL];
+}
+
 - (NSArray *)arrayByExecutingWithBlock:(id(^)(HSQLRow *row, BOOL *stop))block
 {
     NSMutableArray *array = [NSMutableArray array];

@@ -79,7 +79,7 @@
     HSQLStatement *st = [self statementWithQuery:@"ATTACH DATABASE ? AS ?" error:nil];
     st[1] = path;
     st[2] = name;
-    [st executeWithBlock:NULL];
+    [st execute];
 }
 
 @end
